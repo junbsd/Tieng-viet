@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🇻🇳 Tiếng Việt 단어장</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0f0e17;
+    --surface: #1a1830;
+    --card: #22203a;
+    --accent: #ff6b35;
+    --accent2: #ffd166;
+    --accent3: #06d6a0;
+    --accent4: #ef476f;
+    --text: #fffffe;
+    --muted: #a7a9be;
+    --border: #2d2b4e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-bottom: 80px;
+  }
+
+  /* Stars background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 50%, rgba(255,107,53,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(6,214,160,0.06) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15,14,23,0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo { font-size: 20px; font-weight: 900; }
+  .logo span { color: var(--accent); }
+
+  .streak {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,107,53,0.15);
+    border: 1px solid rgba(255,107,53,0.3);
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .xp-bar-wrap {
+    height: 4px;
+    background: var(--border);
+    position: relative;
+  }
+  .xp-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  /* ===== TABS ===== */
+  .tabs {
+    display: flex;
+    background: var(--surface);
+    margin: 16px;
+    border-radius: 16px;
+    padding: 4px;
+    gap: 4px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 10px 4px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .tab.active {
+    background: var(--card);
+    color: var(--text);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  .tab-icon { font-size: 20px; }
+
+  /* ===== SCREENS ===== */
+  .screen { display: none; padding: 0 16px; position: relative; z-index: 1; }
+  .screen.active { display: block; }
+
+  /* ===== STATS CARDS ===== */
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 14px 10px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+
+  .stat-card .num { font-size: 24px; font-weight: 900; }
+  .stat-card .lbl { font-size: 10px; color: var(--muted); margin-top: 2px; font-weight: 600; }
+
+  /* ===== LEARN SCREEN ===== */
+  .daily-header {
+    background: linear-gradient(135deg, #ff6b35, #ef476f);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .daily-header::after {
+    content: '🇻🇳';
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    font-size: 80px;
+    opacity: 0.15;
+  }
+
+  .daily-header h2 { font-size: 18px; font-weight: 800; }
+  .daily-header p { font-size: 13px; opacity: 0.85; margin-top: 4px; }
+
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .progress-track {
+    flex: 1;
+    height: 8px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: white;
+    border-radius: 4px;
+    transition: width 0.4s;
+  }
+
+  /* ===== FLASHCARD GAME ===== */
+  .game-area {
+    position: relative;
+    min-height: 300px;
+  }
+
+  .flashcard {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 36px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s;
+    touch-action: pan-y;
+    user-select: none;
+  }
+
+  .flashcard::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  .card-category {
+    display: inline-block;
+    background: rgba(255,107,53,0.15);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .card-viet {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .card-tone {
+    font-size: 13px;
+    color: var(--accent2);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .sound-btn {
+    background: rgba(6,214,160,0.15);
+    border: 1px solid rgba(6,214,160,0.3);
+    color: var(--accent3);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    transition: all 0.2s;
+  }
+
+  .sound-btn:active { transform: scale(0.9); background: rgba(6,214,160,0.3); }
+
+  .card-hint {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  /* Mode: Quiz */
+  .quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .quiz-opt {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .quiz-opt:active { transform: scale(0.97); }
+  .quiz-opt.correct { background: rgba(6,214,160,0.2); border-color: var(--accent3); color: var(--accent3); }
+  .quiz-opt.wrong { background: rgba(239,71,111,0.2); border-color: var(--accent4); color: var(--accent4); }
+  .quiz-opt.reveal { background: rgba(6,214,160,0.1); border-color: rgba(6,214,160,0.3); }
+
+  /* Mode: Flashcard flip buttons */
+  .flip-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .flip-btn {
+    border: none;
+    border-radius: 16px;
+    padding: 14px 8px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .flip-btn:active { transform: scale(0.95); }
+
+  .btn-again { background: rgba(239,71,111,0.2); color: var(--accent4); border: 2px solid var(--accent4); }
+  .btn-hard { background: rgba(255,209,102,0.15); color: var(--accent2); border: 2px solid rgba(255,209,102,0.4); }
+  .btn-good { background: rgba(6,214,160,0.2); color: var(--accent3); border: 2px solid var(--accent3); }
+
+  /* ===== MODE SELECTOR ===== */
+  .mode-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .mode-btn {
+    border: 2px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .mode-btn.active {
+    border-color: var(--accent);
+    background: rgba(255,107,53,0.15);
+    color: var(--accent);
+  }
+
+  /* ===== ANSWER REVEAL ===== */
+  .answer-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .answer-korean {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+
+  .answer-example {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+    font-family: 'Be Vietnam Pro', sans-serif;
+  }
+
+  /* ===== WORD LIST ===== */
+  .section-title {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .word-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .word-item:active { transform: scale(0.98); }
+
+  .word-viet {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .word-ko { font-size: 14px; color: var(--muted); margin-top: 2px; }
+
+  .word-level {
+    display: flex;
+    gap: 3px;
+  }
+
+  .level-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+
+  .level-dot.filled { background: var(--accent3); }
+
+  /* ===== ACHIEVEMENT ===== */
+  .achievement-toast {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-120px);
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    color: #0f0e17;
+    border-radius: 20px;
+    padding: 14px 24px;
+    font-weight: 800;
+    font-size: 15px;
+    z-index: 1000;
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(255,107,53,0.4);
+    white-space: nowrap;
+  }
+
+  .achievement-toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ===== XP POPUP ===== */
+  .xp-popup {
+    position: fixed;
+    pointer-events: none;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--accent2);
+    z-index: 999;
+    opacity: 0;
+    transition: all 0.8s;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+
+  /* ===== STREAK SCREEN ===== */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .cal-day {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  .cal-day.done { background: var(--accent3); color: #0f0e17; border-color: var(--accent3); }
+  .cal-day.today { border-color: var(--accent); color: var(--accent); }
+
+  /* ===== LEADERBOARD / PROFILE ===== */
+  .profile-header {
+    text-align: center;
+    padding: 24px 0;
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent4));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    margin: 0 auto 12px;
+    border: 3px solid var(--accent2);
+  }
+
+  .level-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    color: #0f0e17;
+    font-weight: 800;
+    font-size: 12px;
+    padding: 4px 14px;
+    border-radius: 20px;
+  }
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(15,14,23,0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border);
+    z-index: 200;
+    padding: 0;
+    safe-area-inset-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* ===== CATEGORY PILL ===== */
+  .cat-select {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 14px;
+  }
+
+  .cat-pill {
+    border: 2px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    border-radius: 20px;
+    padding: 7px 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .cat-pill.active {
+    border-color: var(--accent2);
+    background: rgba(255,209,102,0.15);
+    color: var(--accent2);
+  }
+
+  /* ===== TYPING MODE ===== */
+  .type-input {
+    width: 100%;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-top: 16px;
+  }
+
+  .type-input:focus { border-color: var(--accent); }
+  .type-input.correct { border-color: var(--accent3); background: rgba(6,214,160,0.1); }
+  .type-input.wrong { border-color: var(--accent4); background: rgba(239,71,111,0.1); }
+
+  .submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--accent), var(--accent4));
+    border: none;
+    border-radius: 16px;
+    padding: 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.15s;
+  }
+
+  .submit-btn:active { transform: scale(0.98); }
+
+  .combo-display {
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .combo-display span {
+    color: var(--accent2);
+    font-weight: 800;
+    font-size: 18px;
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .flashcard { animation: cardIn 0.3s ease; }
+
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-8px); }
+    80% { transform: translateX(8px); }
+  }
+
+  .shake { animation: shake 0.4s; }
+
+  @keyframes bounce {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  .bounce { animation: bounce 0.3s; }
+</style>
+</head>
+<body>
+
+<div class="achievement-toast" id="toast">🏆 성취 달성!</div>
+
+<header class="header">
+  <div class="logo">🇻🇳 <span>Việt</span>어장</div>
+  <div class="streak" id="streakBadge">🔥 <span id="streakNum">0</span>일</div>
+</header>
+
+<div class="xp-bar-wrap">
+  <div class="xp-bar" id="xpBar" style="width:0%"></div>
+</div>
+
+<!-- =================== HOME SCREEN =================== -->
+<div class="screen active" id="screen-home">
+  <br>
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="num" id="statTotal" style="color:var(--accent)">0</div>
+      <div class="lbl">총 단어</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="statLearned" style="color:var(--accent3)">0</div>
+      <div class="lbl">암기완료</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="statXP" style="color:var(--accent2)">0</div>
+      <div class="lbl">XP</div>
+    </div>
+  </div>
+
+  <div class="daily-header">
+    <h2>오늘의 학습 목표</h2>
+    <p id="dailyGoalText">오늘 20개 단어를 공부해보세요!</p>
+    <div class="progress-row">
+      <div class="progress-track">
+        <div class="progress-fill" id="dailyProgress" style="width:0%"></div>
+      </div>
+      <span id="dailyCount" style="font-size:12px;font-weight:800">0/20</span>
+    </div>
+  </div>
+
+  <!-- Review due -->
+  <div style="background:rgba(239,71,111,0.1);border:1px solid rgba(239,71,111,0.3);border-radius:16px;padding:16px;margin-bottom:14px;" id="reviewBox">
+    <div style="font-weight:800;margin-bottom:4px;">⏰ 복습 대기 중</div>
+    <div style="font-size:13px;color:var(--muted)" id="reviewCount">0개 단어 복습이 필요합니다</div>
+  </div>
+
+  <div class="section-title">📚 카테고리</div>
+  <div class="cat-select" id="homeCategories"></div>
+
+  <button onclick="switchTab('learn')" style="width:100%;background:linear-gradient(135deg,var(--accent),var(--accent4));border:none;border-radius:18px;padding:18px;font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:white;cursor:pointer;margin-bottom:10px;">
+    🎮 지금 학습 시작!
+  </button>
+</div>
+
+<!-- =================== LEARN SCREEN =================== -->
+<div class="screen" id="screen-learn">
+  <br>
+  <div class="mode-row">
+    <button class="mode-btn active" id="mode-flash" onclick="setMode('flash')">🃏 플래시카드</button>
+    <button class="mode-btn" id="mode-quiz" onclick="setMode('quiz')">🎯 퀴즈</button>
+    <button class="mode-btn" id="mode-type" onclick="setMode('type')">⌨️ 받아쓰기</button>
+  </div>
+
+  <div class="combo-display">연속 정답: <span id="comboNum">0</span> 🔥</div>
+
+  <div class="game-area" id="gameArea"></div>
+</div>
+
+<!-- =================== WORDLIST SCREEN =================== -->
+<div class="screen" id="screen-words">
+  <br>
+  <div class="section-title">📖 단어 목록</div>
+  <div class="cat-select" id="filterCategories"></div>
+  <div id="wordList"></div>
+</div>
+
+<!-- =================== PROFILE SCREEN =================== -->
+<div class="screen" id="screen-profile">
+  <div class="profile-header">
+    <div class="avatar">🦁</div>
+    <div style="font-size:22px;font-weight:900;margin-bottom:6px">베트남어 학습자</div>
+    <div class="level-badge" id="levelBadge">LV.1 초보자</div>
+  </div>
+
+  <div class="stats-row" style="margin-bottom:20px">
+    <div class="stat-card">
+      <div class="num" id="pStreak" style="color:var(--accent)">0</div>
+      <div class="lbl">연속 일수</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="pCorrect" style="color:var(--accent3)">0</div>
+      <div class="lbl">정답 수</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="pXP" style="color:var(--accent2)">0</div>
+      <div class="lbl">총 XP</div>
+    </div>
+  </div>
+
+  <div class="section-title">📅 학습 캘린더 (최근 21일)</div>
+  <div class="calendar-grid" id="calendarGrid"></div>
+
+  <div class="section-title">🏆 업적</div>
+  <div id="achievementList"></div>
+</div>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav">
+  <div class="tabs">
+    <button class="tab active" id="tab-home" onclick="switchTab('home')">
+      <span class="tab-icon">🏠</span>홈
+    </button>
+    <button class="tab" id="tab-learn" onclick="switchTab('learn')">
+      <span class="tab-icon">🎮</span>학습
+    </button>
+    <button class="tab" id="tab-words" onclick="switchTab('words')">
+      <span class="tab-icon">📖</span>단어장
+    </button>
+    <button class="tab" id="tab-profile" onclick="switchTab('profile')">
+      <span class="tab-icon">👤</span>프로필
+    </button>
+  </div>
+</nav>
+
+<script>
+// ========== VOCABULARY DATABASE ==========
+const VOCABULARY = [
+  // 인사
+  { id:1, viet:'Xin chào', ko:'안녕하세요', tone:'씬 짜오', cat:'인사', example:'Xin chào, tôi là Kim. (안녕하세요, 저는 김입니다.)' },
+  { id:2, viet:'Cảm ơn', ko:'감사합니다', tone:'깜 언', cat:'인사', example:'Cảm ơn rất nhiều! (정말 감사합니다!)' },
+  { id:3, viet:'Xin lỗi', ko:'죄송합니다', tone:'씬 로이', cat:'인사', example:'Xin lỗi, tôi không biết. (죄송합니다, 저는 모릅니다.)' },
+  { id:4, viet:'Tạm biệt', ko:'안녕히 가세요', tone:'땀 비엣', cat:'인사', example:'Tạm biệt! Hẹn gặp lại! (안녕히! 다시 만나요!)' },
+  { id:5, viet:'Vâng', ko:'네', tone:'방', cat:'인사', example:'Vâng, tôi hiểu. (네, 이해합니다.)' },
+  { id:6, viet:'Không', ko:'아니요', tone:'콩', cat:'인사', example:'Không, cảm ơn. (아니요, 괜찮습니다.)' },
+  { id:7, viet:'Bạn khỏe không?', ko:'잘 지내셨나요?', tone:'반 쾌 콩', cat:'인사', example:'Bạn khỏe không? - Tôi khỏe, cảm ơn! (잘 지내요? - 네, 잘 지내요!)' },
+  { id:8, viet:'Rất vui được gặp', ko:'만나서 반갑습니다', tone:'젓 부이 드억 갑', cat:'인사', example:'Rất vui được gặp bạn! (만나서 반가워요!)' },
+
+  // 숫자
+  { id:9, viet:'Một', ko:'1 (일)', tone:'못', cat:'숫자', example:'Một cái bánh. (빵 한 개.)' },
+  { id:10, viet:'Hai', ko:'2 (이)', tone:'하이', cat:'숫자', example:'Hai người. (두 사람.)' },
+  { id:11, viet:'Ba', ko:'3 (삼)', tone:'바', cat:'숫자', example:'Ba ngày. (3일.)' },
+  { id:12, viet:'Bốn', ko:'4 (사)', tone:'본', cat:'숫자', example:'Bốn mùa. (4계절.)' },
+  { id:13, viet:'Năm', ko:'5 (오)', tone:'남', cat:'숫자', example:'Năm trăm đồng. (500동.)' },
+  { id:14, viet:'Mười', ko:'10 (십)', tone:'므어이', cat:'숫자', example:'Mười người. (10명.)' },
+  { id:15, viet:'Trăm', ko:'100 (백)', tone:'짬', cat:'숫자', example:'Một trăm. (100.)' },
+  { id:16, viet:'Nghìn', ko:'1000 (천)', tone:'응인', cat:'숫자', example:'Một nghìn đồng. (1000동.)' },
+
+  // 음식
+  { id:17, viet:'Phở', ko:'쌀국수 (포)', tone:'퍼', cat:'음식', example:'Một tô phở bò. (소고기 쌀국수 한 그릇.)' },
+  { id:18, viet:'Cơm', ko:'밥', tone:'껌', cat:'음식', example:'Ăn cơm chưa? (밥 먹었어요?)' },
+  { id:19, viet:'Nước', ko:'물', tone:'느억', cat:'음식', example:'Cho tôi một ly nước. (물 한 잔 주세요.)' },
+  { id:20, viet:'Bánh mì', ko:'바게트 빵', tone:'바잉 미', cat:'음식', example:'Bánh mì thịt rất ngon. (고기 바게트가 정말 맛있어.)' },
+  { id:21, viet:'Cà phê', ko:'커피', tone:'까 페', cat:'음식', example:'Cà phê sữa đá, làm ơn. (아이스 밀크커피 주세요.)' },
+  { id:22, viet:'Ngon', ko:'맛있다', tone:'응온', cat:'음식', example:'Món này ngon lắm! (이 음식 정말 맛있어요!)' },
+  { id:23, viet:'Bia', ko:'맥주', tone:'비아', cat:'음식', example:'Một chai bia, please. (맥주 한 병 주세요.)' },
+  { id:24, viet:'Bún bò', ko:'소고기 쌀국수 (분보)', tone:'분 보', cat:'음식', example:'Bún bò Huế rất cay. (후에 분보는 매우 맵다.)' },
+  { id:25, viet:'Trái cây', ko:'과일', tone:'짜이 까이', cat:'음식', example:'Tôi thích trái cây nhiệt đới. (열대 과일을 좋아해요.)' },
+  { id:26, viet:'Thịt', ko:'고기', tone:'팃', cat:'음식', example:'Thịt lợn hay thịt bò? (돼지고기 아니면 소고기?)' },
+
+  // 교통
+  { id:27, viet:'Xe máy', ko:'오토바이', tone:'쎄 마이', cat:'교통', example:'Tôi đi làm bằng xe máy. (오토바이로 출근해요.)' },
+  { id:28, viet:'Taxi', ko:'택시', tone:'딱씨', cat:'교통', example:'Gọi taxi cho tôi. (택시 불러주세요.)' },
+  { id:29, viet:'Sân bay', ko:'공항', tone:'선 바이', cat:'교통', example:'Sân bay Nội Bài. (노이바이 공항.)' },
+  { id:30, viet:'Bến xe', ko:'버스 터미널', tone:'벤 쎄', cat:'교통', example:'Bến xe ở đâu? (버스 터미널이 어디 있어요?)' },
+  { id:31, viet:'Đường', ko:'길/도로', tone:'드엉', cat:'교통', example:'Đường này đi đâu? (이 길은 어디로 가요?)' },
+  { id:32, viet:'Rẽ trái', ko:'왼쪽으로 돌다', tone:'제 짜이', cat:'교통', example:'Rẽ trái ở ngã tư. (사거리에서 좌회전하세요.)' },
+
+  // 쇼핑
+  { id:33, viet:'Bao nhiêu tiền?', ko:'얼마예요?', tone:'바오 니에우 띠엔', cat:'쇼핑', example:'Cái này bao nhiêu tiền? (이것은 얼마예요?)' },
+  { id:34, viet:'Đắt quá', ko:'너무 비싸요', tone:'닷 꽈', cat:'쇼핑', example:'Đắt quá! Giảm giá được không? (너무 비싸요! 깎아줄 수 있어요?)' },
+  { id:35, viet:'Rẻ hơn', ko:'더 싸게', tone:'제 헌', cat:'쇼핑', example:'Cho tôi rẻ hơn một chút. (조금 더 싸게 해주세요.)' },
+  { id:36, viet:'Mua', ko:'사다', tone:'무아', cat:'쇼핑', example:'Tôi muốn mua cái này. (이것을 사고 싶어요.)' },
+  { id:37, viet:'Chợ', ko:'시장', tone:'쩌', cat:'쇼핑', example:'Chợ Bến Thành rất lớn. (벤탄 시장은 매우 커요.)' },
+  { id:38, viet:'Đồng', ko:'베트남 화폐 (동)', tone:'동', cat:'쇼핑', example:'Mười nghìn đồng. (1만 동.)' },
+
+  // 일상
+  { id:39, viet:'Nhà', ko:'집', tone:'냐', cat:'일상', example:'Nhà tôi ở Hà Nội. (우리 집은 하노이에 있어요.)' },
+  { id:40, viet:'Làm việc', ko:'일하다', tone:'람 비엑', cat:'일상', example:'Tôi làm việc từ 8 giờ. (8시부터 일해요.)' },
+  { id:41, viet:'Ngủ', ko:'자다', tone:'응우', cat:'일상', example:'Tôi muốn ngủ. (자고 싶어요.)' },
+  { id:42, viet:'Học', ko:'공부하다', tone:'혹', cat:'일상', example:'Tôi đang học tiếng Việt. (베트남어 공부 중이에요.)' },
+  { id:43, viet:'Yêu', ko:'사랑하다', tone:'이에우', cat:'일상', example:'Tôi yêu bạn. (사랑해요.)' },
+  { id:44, viet:'Vui', ko:'기쁘다/즐겁다', tone:'부이', cat:'일상', example:'Tôi rất vui! (정말 기뻐요!)' },
+  { id:45, viet:'Buồn', ko:'슬프다', tone:'부온', cat:'일상', example:'Tôi rất buồn hôm nay. (오늘 많이 슬퍼요.)' },
+  { id:46, viet:'Mệt', ko:'피곤하다', tone:'멧', cat:'일상', example:'Tôi mệt lắm. (정말 피곤해요.)' },
+  { id:47, viet:'Đẹp', ko:'예쁘다/아름답다', tone:'댑', cat:'일상', example:'Bạn rất đẹp! (정말 예뻐요!)' },
+  { id:48, viet:'Khỏe', ko:'건강하다', tone:'쾌', cat:'일상', example:'Tôi rất khỏe. (저는 매우 건강해요.)' },
+
+  // 여행
+  { id:49, viet:'Khách sạn', ko:'호텔', tone:'칵 산', cat:'여행', example:'Khách sạn ở đâu? (호텔이 어디예요?)' },
+  { id:50, viet:'Phòng', ko:'방', tone:'퐁', cat:'여행', example:'Tôi muốn đặt phòng. (방을 예약하고 싶어요.)' },
+  { id:51, viet:'Biển', ko:'바다', tone:'비엔', cat:'여행', example:'Đà Nẵng có biển đẹp. (다낭은 바다가 아름다워요.)' },
+  { id:52, viet:'Núi', ko:'산', tone:'누이', cat:'여행', example:'Tôi muốn leo núi. (등산하고 싶어요.)' },
+  { id:53, viet:'Hà Nội', ko:'하노이 (수도)', tone:'하 노이', cat:'여행', example:'Hà Nội là thủ đô Việt Nam. (하노이는 베트남의 수도입니다.)' },
+  { id:54, viet:'Thành phố Hồ Chí Minh', ko:'호치민시', tone:'타잉 포 호 찌 밍', cat:'여행', example:'TPHCM là thành phố lớn nhất. (호치민시는 가장 큰 도시.)' },
+
+  // 숙어/표현
+  { id:55, viet:'Không sao', ko:'괜찮아요', tone:'콩 싸오', cat:'숙어', example:'- Xin lỗi! - Không sao! (- 죄송해요! - 괜찮아요!)' },
+  { id:56, viet:'Tôi không hiểu', ko:'이해 못 했어요', tone:'또이 콩 히에우', cat:'숙어', example:'Xin lỗi, tôi không hiểu. (죄송합니다, 이해 못 했어요.)' },
+  { id:57, viet:'Nói chậm thôi', ko:'천천히 말해주세요', tone:'노이 쩜 토이', cat:'숙어', example:'Bạn có thể nói chậm thôi không? (천천히 말해줄 수 있어요?)' },
+  { id:58, viet:'Làm ơn', ko:'제발/부탁드려요', tone:'람 언', cat:'숙어', example:'Giúp tôi với, làm ơn. (부탁드려요, 도와주세요.)' },
+  { id:59, viet:'Thật sự', ko:'진짜로', tone:'텃 쓰', cat:'숙어', example:'Thật sự không? (진짜예요?)' },
+  { id:60, viet:'Quá trời', ko:'엄청나게 (구어)', tone:'꽈 쩌이', cat:'숙어', example:'Ngon quá trời! (엄청 맛있다!)' },
+];
+
+// ========== SPACED REPETITION (SM-2 simplified) ==========
+const LEVELS = [0, 1, 3, 7, 14, 30]; // days
+
+let state = JSON.parse(localStorage.getItem('viet_state') || 'null') || {
+  xp: 0,
+  streak: 0,
+  lastStudyDate: null,
+  studiedToday: 0,
+  correctToday: 0,
+  totalCorrect: 0,
+  studiedDates: [],
+  cards: {},  // id -> {level, nextReview, wrongCount}
+  achievements: [],
+  combo: 0,
+};
+
+function getCard(id) {
+  if (!state.cards[id]) {
+    state.cards[id] = { level: 0, nextReview: 0, wrongCount: 0 };
+  }
+  return state.cards[id];
+}
+
+function isDueToday(id) {
+  const c = getCard(id);
+  return Date.now() >= c.nextReview;
+}
+
+function getDueCards() {
+  return VOCABULARY.filter(w => isDueToday(w.id));
+}
+
+function scheduleCard(id, quality) {
+  // quality: 0=wrong, 1=hard, 2=correct, 3=perfect
+  const c = getCard(id);
+  if (quality < 1) {
+    c.level = 0;
+    c.wrongCount++;
+  } else if (quality === 1) {
+    c.level = Math.max(0, c.level - 1);
+  } else {
+    c.level = Math.min(LEVELS.length - 1, c.level + 1);
+  }
+  const days = LEVELS[c.level];
+  c.nextReview = Date.now() + days * 86400000;
+  saveState();
+}
+
+function addXP(amount) {
+  state.xp += amount;
+  saveState();
+  updateXPBar();
+}
+
+function saveState() {
+  localStorage.setItem('viet_state', JSON.stringify(state));
+}
+
+// ========== DAILY STREAK ==========
+function checkStreak() {
+  const today = new Date().toDateString();
+  const last = state.lastStudyDate;
+  if (last !== today) {
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
+    if (last === yesterday) {
+      state.streak++;
+    } else if (!last) {
+      state.streak = 1;
+    } else {
+      state.streak = 1;
+    }
+    state.lastStudyDate = today;
+    state.studiedToday = 0;
+    if (!state.studiedDates.includes(today)) {
+      state.studiedDates.push(today);
+    }
+    saveState();
+  }
+  document.getElementById('streakNum').textContent = state.streak;
+}
+
+// ========== TTS ==========
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'vi-VN';
+  u.rate = 0.85;
+  const voices = speechSynthesis.getVoices();
+  const vVoice = voices.find(v => v.lang.startsWith('vi'));
+  if (vVoice) u.voice = vVoice;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+
+// ========== TABS ==========
+const tabs = ['home', 'learn', 'words', 'profile'];
+function switchTab(tab) {
+  tabs.forEach(t => {
+    document.getElementById('screen-' + t).classList.toggle('active', t === tab);
+    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+  });
+  if (tab === 'home') updateHome();
+  if (tab === 'learn') startLearn();
+  if (tab === 'words') renderWordList();
+  if (tab === 'profile') renderProfile();
+}
+
+// ========== HOME ==========
+function updateHome() {
+  document.getElementById('statTotal').textContent = VOCABULARY.length;
+  const learned = VOCABULARY.filter(w => getCard(w.id).level >= 2).length;
+  document.getElementById('statLearned').textContent = learned;
+  document.getElementById('statXP').textContent = state.xp;
+
+  const due = getDueCards().length;
+  document.getElementById('reviewCount').textContent = due + '개 단어 복습이 필요합니다';
+
+  const progress = Math.min(100, (state.studiedToday / 20) * 100);
+  document.getElementById('dailyProgress').style.width = progress + '%';
+  document.getElementById('dailyCount').textContent = state.studiedToday + '/20';
+
+  // Categories
+  const cats = [...new Set(VOCABULARY.map(w => w.cat))];
+  const catDiv = document.getElementById('homeCategories');
+  catDiv.innerHTML = cats.map(c => 
+    `<button class="cat-pill active" onclick="filterLearnCat('${c}')">${c}</button>`
+  ).join('');
+
+  updateXPBar();
+  document.getElementById('streakNum').textContent = state.streak;
+}
+
+let learnCatFilter = null;
+function filterLearnCat(cat) {
+  learnCatFilter = cat;
+  switchTab('learn');
+}
+
+// ========== XP BAR ==========
+function updateXPBar() {
+  const level = Math.floor(state.xp / 500) + 1;
+  const pct = ((state.xp % 500) / 500) * 100;
+  document.getElementById('xpBar').style.width = pct + '%';
+}
+
+// ========== LEARN MODE ==========
+let currentMode = 'flash';
+let currentQueue = [];
+let currentIndex = 0;
+let cardFlipped = false;
+let combo = 0;
+
+function setMode(m) {
+  currentMode = m;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('mode-' + m).classList.add('active');
+  startLearn();
+}
+
+function startLearn() {
+  // Build queue: due cards first, then new cards
+  let due = getDueCards();
+  let newCards = VOCABULARY.filter(w => getCard(w.id).level === 0 && !isDueToday(w.id));
+  
+  if (learnCatFilter) {
+    due = due.filter(w => w.cat === learnCatFilter);
+    newCards = newCards.filter(w => w.cat === learnCatFilter);
+  }
+  
+  currentQueue = [...shuffle(due), ...shuffle(newCards).slice(0, 10)];
+  if (currentQueue.length === 0) currentQueue = shuffle(VOCABULARY);
+  currentIndex = 0;
+  renderCard();
+}
+
+function shuffle(arr) {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+function renderCard() {
+  const word = currentQueue[currentIndex % currentQueue.length];
+  document.getElementById('comboNum').textContent = combo;
+
+  if (currentMode === 'flash') renderFlash(word);
+  else if (currentMode === 'quiz') renderQuiz(word);
+  else renderType(word);
+}
+
+function renderFlash(word) {
+  const area = document.getElementById('gameArea');
+  const c = getCard(word.id);
+  area.innerHTML = `
+    <div class="flashcard">
+      <div class="card-category">${word.cat}</div>
+      <div class="card-viet">${word.viet}</div>
+      <div class="card-tone">[${word.tone}]</div>
+      <button class="sound-btn" onclick="speak('${word.viet.replace(/'/g,"\\'")}')">🔊</button>
+      <div class="card-hint">카드를 탭해서 뜻 보기</div>
+      <div class="answer-section" id="answerSec" style="display:none">
+        <div class="answer-korean">${word.ko}</div>
+        <div class="answer-example">${word.example}</div>
+        <div class="flip-actions" style="margin-top:20px">
+          <button class="flip-btn btn-again" onclick="rate(0)">😵 모름</button>
+          <button class="flip-btn btn-hard" onclick="rate(1)">😅 어려움</button>
+          <button class="flip-btn btn-good" onclick="rate(2)">😊 알았음!</button>
+        </div>
+      </div>
+    </div>
+  `;
+  area.querySelector('.flashcard').addEventListener('click', function(e) {
+    if (e.target.tagName === 'BUTTON') return;
+    const ans = document.getElementById('answerSec');
+    if (ans.style.display === 'none') {
+      ans.style.display = 'block';
+      speak(word.viet);
+    }
+  });
+}
+
+function renderQuiz(word) {
+  // Get 3 wrong answers from same category or random
+  const others = VOCABULARY.filter(w => w.id !== word.id);
+  const wrong = shuffle(others).slice(0, 3);
+  const options = shuffle([word, ...wrong]);
+
+  const area = document.getElementById('gameArea');
+  area.innerHTML = `
+    <div class="flashcard">
+      <div class="card-category">${word.cat}</div>
+      <div class="card-viet">${word.viet}</div>
+      <div class="card-tone">[${word.tone}]</div>
+      <button class="sound-btn" onclick="speak('${word.viet.replace(/'/g,"\\'")}')">🔊</button>
+      <div class="card-hint">이 단어의 뜻은?</div>
+    </div>
+    <div class="quiz-options" id="quizOpts">
+      ${options.map(opt => `
+        <button class="quiz-opt" onclick="checkAnswer(${opt.id === word.id}, this, ${word.id})">
+          ${opt.ko}
+        </button>
+      `).join('')}
+    </div>
+  `;
+}
+
+function checkAnswer(correct, btn, wordId) {
+  const opts = document.querySelectorAll('.quiz-opt');
+  opts.forEach(b => b.onclick = null);
+  
+  if (correct) {
+    btn.classList.add('correct');
+    combo++;
+    rate(2, wordId, false);
+  } else {
+    btn.classList.add('wrong');
+    combo = 0;
+    // Reveal correct
+    opts.forEach(b => {
+      if (b !== btn) b.classList.add('reveal');
+    });
+    scheduleCard(wordId, 0);
+    addXP(0);
+    document.getElementById('comboNum').textContent = combo;
+  }
+  
+  setTimeout(() => {
+    currentIndex++;
+    renderCard();
+  }, 1200);
+}
+
+function renderType(word) {
+  const area = document.getElementById('gameArea');
+  area.innerHTML = `
+    <div class="flashcard">
+      <div class="card-category">${word.cat}</div>
+      <div style="font-size:18px;color:var(--muted);margin-bottom:12px;">뜻: <strong style="color:var(--accent2)">${word.ko}</strong></div>
+      <div class="card-hint">베트남어로 써보세요</div>
+      <button class="sound-btn" onclick="speak('${word.viet.replace(/'/g,"\\'")}')">🔊 힌트 듣기</button>
+    </div>
+    <input class="type-input" id="typeInput" placeholder="베트남어 입력..." autocomplete="off" autocorrect="off" spellcheck="false">
+    <button class="submit-btn" onclick="checkType('${word.viet.replace(/'/g,"\\'")}', ${word.id})">확인 ✓</button>
+  `;
+  document.getElementById('typeInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkType(word.viet, word.id);
+  });
+}
+
+function checkType(answer, wordId) {
+  const inp = document.getElementById('typeInput');
+  const val = inp.value.trim();
+  const correct = val.toLowerCase() === answer.toLowerCase();
+  
+  if (correct) {
+    inp.classList.add('correct');
+    combo++;
+    showXPPopup('+15 XP ✨');
+    rate(2, wordId, false);
+  } else {
+    inp.classList.add('wrong');
+    inp.value = answer;
+    combo = 0;
+    scheduleCard(wordId, 0);
+    addXP(0);
+    document.getElementById('comboNum').textContent = combo;
+  }
+  
+  setTimeout(() => {
+    currentIndex++;
+    renderCard();
+  }, 1500);
+}
+
+function rate(quality, wordId, autoNext = true) {
+  const word = currentQueue[currentIndex % currentQueue.length];
+  const id = wordId || word.id;
+  
+  scheduleCard(id, quality);
+  
+  const xpMap = {0: 0, 1: 5, 2: 10, 3: 20};
+  const xp = xpMap[quality] || 0;
+  
+  if (combo >= 5) addXP(xp * 2); // combo bonus
+  else addXP(xp);
+  
+  if (quality >= 2) {
+    state.studiedToday++;
+    state.totalCorrect++;
+    combo++;
+    showXPPopup('+' + xp + ' XP');
+  } else {
+    combo = 0;
+  }
+  
+  document.getElementById('comboNum').textContent = combo;
+  state.combo = combo;
+  saveState();
+  checkAchievements();
+  
+  if (autoNext) {
+    setTimeout(() => {
+      currentIndex++;
+      renderCard();
+    }, 300);
+  }
+}
+
+// ========== XP POPUP ==========
+function showXPPopup(text) {
+  const el = document.createElement('div');
+  el.className = 'xp-popup';
+  el.textContent = text;
+  el.style.cssText = `position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-size:24px;font-weight:900;color:var(--accent2);z-index:999;pointer-events:none;text-shadow:0 2px 8px rgba(0,0,0,0.5)`;
+  document.body.appendChild(el);
+  
+  requestAnimationFrame(() => {
+    el.style.transition = 'all 0.8s ease';
+    el.style.opacity = '1';
+    el.style.transform = 'translate(-50%,-150%)';
+  });
+  
+  setTimeout(() => el.remove(), 900);
+}
+
+// ========== ACHIEVEMENTS ==========
+const ACHIEVEMENTS = [
+  { id:'first', icon:'🎉', title:'첫 시작!', desc:'첫 번째 단어를 공부했습니다', check: () => state.totalCorrect >= 1 },
+  { id:'streak3', icon:'🔥', title:'3일 연속!', desc:'3일 연속 공부했습니다', check: () => state.streak >= 3 },
+  { id:'streak7', icon:'⚡', title:'일주일 연속!', desc:'7일 연속 공부했습니다', check: () => state.streak >= 7 },
+  { id:'words10', icon:'📚', title:'단어 10개', desc:'10개 단어를 암기했습니다', check: () => state.totalCorrect >= 10 },
+  { id:'words50', icon:'🏆', title:'단어 50개!', desc:'50개 단어를 암기했습니다', check: () => state.totalCorrect >= 50 },
+  { id:'combo5', icon:'💥', title:'콤보 마스터!', desc:'5연속 정답!', check: () => combo >= 5 },
+  { id:'xp100', icon:'⭐', title:'XP 100!', desc:'100 XP를 획득했습니다', check: () => state.xp >= 100 },
+];
+
+function checkAchievements() {
+  ACHIEVEMENTS.forEach(a => {
+    if (!state.achievements.includes(a.id) && a.check()) {
+      state.achievements.push(a.id);
+      saveState();
+      showToast(a.icon + ' ' + a.title);
+    }
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ========== WORD LIST ==========
+let filterCat = 'all';
+
+function renderWordList() {
+  const cats = ['all', ...new Set(VOCABULARY.map(w => w.cat))];
+  const filterDiv = document.getElementById('filterCategories');
+  filterDiv.innerHTML = cats.map(c => 
+    `<button class="cat-pill ${filterCat === c ? 'active' : ''}" onclick="setFilter('${c}')">${c === 'all' ? '전체' : c}</button>`
+  ).join('');
+  
+  const list = filterCat === 'all' ? VOCABULARY : VOCABULARY.filter(w => w.cat === filterCat);
+  const listDiv = document.getElementById('wordList');
+  listDiv.innerHTML = list.map(w => {
+    const c = getCard(w.id);
+    const dots = Array.from({length: LEVELS.length - 1}, (_, i) => 
+      `<div class="level-dot ${i < c.level ? 'filled' : ''}"></div>`
+    ).join('');
+    return `
+      <div class="word-item" onclick="speak('${w.viet.replace(/'/g,"\\'")}')">
+        <div>
+          <div class="word-viet">${w.viet} 🔊</div>
+          <div class="word-ko">${w.ko}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">[${w.tone}]</div>
+        </div>
+        <div class="word-level">${dots}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function setFilter(cat) {
+  filterCat = cat;
+  renderWordList();
+}
+
+// ========== PROFILE ==========
+function renderProfile() {
+  document.getElementById('pStreak').textContent = state.streak;
+  document.getElementById('pCorrect').textContent = state.totalCorrect;
+  document.getElementById('pXP').textContent = state.xp;
+  
+  const level = Math.floor(state.xp / 500) + 1;
+  const levelNames = ['초보자', '입문자', '학습자', '중급자', '상급자', '전문가'];
+  document.getElementById('levelBadge').textContent = 'LV.' + level + ' ' + (levelNames[Math.min(level-1, 5)] || '마스터');
+  
+  // Calendar (last 21 days)
+  const cal = document.getElementById('calendarGrid');
+  const today = new Date();
+  let html = '';
+  for (let i = 20; i >= 0; i--) {
+    const d = new Date(today - i * 86400000);
+    const ds = d.toDateString();
+    const done = state.studiedDates.includes(ds);
+    const isToday = i === 0;
+    html += `<div class="cal-day ${done ? 'done' : ''} ${isToday ? 'today' : ''}">${d.getDate()}</div>`;
+  }
+  cal.innerHTML = html;
+  
+  // Achievements
+  const achDiv = document.getElementById('achievementList');
+  achDiv.innerHTML = ACHIEVEMENTS.map(a => {
+    const unlocked = state.achievements.includes(a.id);
+    return `
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;opacity:${unlocked ? 1 : 0.4}">
+        <span style="font-size:32px">${a.icon}</span>
+        <div>
+          <div style="font-weight:800">${a.title}</div>
+          <div style="font-size:12px;color:var(--muted)">${a.desc}</div>
+        </div>
+        ${unlocked ? '<span style="margin-left:auto;color:var(--accent3);font-size:20px">✓</span>' : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+// ========== INIT ==========
+speechSynthesis.onvoiceschanged = () => {};
+
+checkStreak();
+updateHome();
+
+// Load voices
+window.addEventListener('load', () => {
+  speechSynthesis.getVoices();
+});
+</script>
+</body>
+</html>
