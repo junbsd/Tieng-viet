@@ -1,235 +1,248 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>🇻🇳 Tiếng Việt 단어장</title>
+<title>🇻🇳🇰🇷 언어 학습 / Học Ngôn Ngữ</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
-  :root {
-    --bg:#0f0e17; --surface:#1a1830; --card:#22203a;
-    --accent:#ff6b35; --accent2:#ffd166; --accent3:#06d6a0; --accent4:#ef476f;
-    --text:#fffffe; --muted:#a7a9be; --border:#2d2b4e;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;padding-bottom:90px}
-  body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(255,107,53,.07) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(6,214,160,.05) 0%,transparent 50%);pointer-events:none;z-index:0}
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#0f0e17;--surface:#1a1830;--card:#22203a;
+  --accent:#ff6b35;--accent2:#ffd166;--accent3:#06d6a0;--accent4:#ef476f;
+  --text:#fffffe;--muted:#a7a9be;--border:#2d2b4e;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(255,107,53,.07) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(6,214,160,.05) 0%,transparent 50%);pointer-events:none;z-index:0}
 
-  .header{position:sticky;top:0;z-index:100;background:rgba(15,14,23,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
-  .logo{font-size:20px;font-weight:900}.logo span{color:var(--accent)}
-  .streak{display:flex;align-items:center;gap:6px;background:rgba(255,107,53,.15);border:1px solid rgba(255,107,53,.3);border-radius:20px;padding:6px 12px;font-size:13px;font-weight:700}
-  .xp-bar-wrap{height:4px;background:var(--border)}
-  .xp-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s}
-  .tabs{display:flex;background:var(--surface);margin:16px;border-radius:16px;padding:4px;gap:4px;position:relative;z-index:1}
-  .tab{flex:1;padding:10px 4px;border:none;background:transparent;color:var(--muted);font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;cursor:pointer;border-radius:12px;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:4px}
-  .tab.active{background:var(--card);color:var(--text);box-shadow:0 2px 12px rgba(0,0,0,.3)}
-  .tab-icon{font-size:20px}
-  .screen{display:none;padding:0 16px;position:relative;z-index:1}
-  .screen.active{display:block}
-  .stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
-  .stat-card{background:var(--surface);border-radius:16px;padding:14px 10px;text-align:center;border:1px solid var(--border)}
-  .stat-card .num{font-size:24px;font-weight:900}
-  .stat-card .lbl{font-size:10px;color:var(--muted);margin-top:2px;font-weight:600}
-  .daily-header{background:linear-gradient(135deg,#ff6b35,#ef476f);border-radius:20px;padding:20px;margin-bottom:16px;position:relative;overflow:hidden}
-  .daily-header::after{content:'🇻🇳';position:absolute;right:-10px;top:-10px;font-size:80px;opacity:.15}
-  .daily-header h2{font-size:18px;font-weight:800}
-  .daily-header p{font-size:13px;opacity:.85;margin-top:4px}
-  .progress-row{display:flex;align-items:center;gap:8px;margin-top:12px}
-  .progress-track{flex:1;height:8px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden}
-  .progress-fill{height:100%;background:white;border-radius:4px;transition:width .4s}
-  .section-title{font-size:16px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-  .mode-row{display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px}
-  .mode-btn{border:2px solid var(--border);background:var(--surface);color:var(--muted);border-radius:20px;padding:8px 16px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s}
-  .mode-btn.active{border-color:var(--accent);background:rgba(255,107,53,.15);color:var(--accent)}
-  .flashcard{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:36px 24px;text-align:center;position:relative;overflow:hidden;animation:cardIn .3s ease}
-  .flashcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
-  .card-category{display:inline-block;background:rgba(255,107,53,.15);color:var(--accent);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;text-transform:uppercase}
-  .card-viet{font-family:'Be Vietnam Pro',sans-serif;font-size:42px;font-weight:700;line-height:1.2;margin-bottom:8px}
-  .card-tone{font-size:13px;color:var(--accent2);font-weight:600;margin-bottom:16px}
-  .sound-btn{background:rgba(6,214,160,.15);border:1px solid rgba(6,214,160,.3);color:var(--accent3);border-radius:50%;width:48px;height:48px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;transition:all .2s}
-  .sound-btn:active{transform:scale(.9)}
-  .card-hint{font-size:14px;color:var(--muted);margin-bottom:8px}
-  .answer-section{margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
-  .answer-korean{font-size:22px;font-weight:800;color:var(--accent2);margin-bottom:8px}
-  .answer-example{font-size:13px;color:var(--muted);line-height:1.5;font-family:'Be Vietnam Pro',sans-serif}
-  .flip-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:20px}
-  .flip-btn{border:none;border-radius:16px;padding:14px 8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;transition:all .15s}
-  .flip-btn:active{transform:scale(.95)}
-  .btn-again{background:rgba(239,71,111,.2);color:var(--accent4);border:2px solid var(--accent4)}
-  .btn-hard{background:rgba(255,209,102,.15);color:var(--accent2);border:2px solid rgba(255,209,102,.4)}
-  .btn-good{background:rgba(6,214,160,.2);color:var(--accent3);border:2px solid var(--accent3)}
-  .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
-  .quiz-opt{background:var(--surface);border:2px solid var(--border);border-radius:16px;padding:16px 10px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;color:var(--text);cursor:pointer;transition:all .15s;text-align:center;line-height:1.3}
-  .quiz-opt:active{transform:scale(.97)}
-  .quiz-opt.correct{background:rgba(6,214,160,.2);border-color:var(--accent3);color:var(--accent3)}
-  .quiz-opt.wrong{background:rgba(239,71,111,.2);border-color:var(--accent4);color:var(--accent4)}
-  .quiz-opt.reveal{background:rgba(6,214,160,.1);border-color:rgba(6,214,160,.3)}
-  .type-input{width:100%;background:var(--surface);border:2px solid var(--border);border-radius:16px;padding:16px;font-family:'Nunito',sans-serif;font-size:18px;font-weight:700;color:var(--text);text-align:center;outline:none;transition:border-color .2s;margin-top:16px}
-  .type-input:focus{border-color:var(--accent)}
-  .type-input.correct{border-color:var(--accent3);background:rgba(6,214,160,.1)}
-  .type-input.wrong{border-color:var(--accent4);background:rgba(239,71,111,.1)}
-  .submit-btn{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent4));border:none;border-radius:16px;padding:16px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;color:white;cursor:pointer;margin-top:10px;transition:transform .15s}
-  .submit-btn:active{transform:scale(.98)}
-  .combo-display{text-align:center;font-size:13px;color:var(--muted);margin-bottom:10px}
-  .combo-display span{color:var(--accent2);font-weight:800;font-size:18px}
-  .cat-select{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px}
-  .cat-pill{border:2px solid var(--border);background:var(--surface);color:var(--muted);border-radius:20px;padding:7px 14px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
-  .cat-pill.active{border-color:var(--accent2);background:rgba(255,209,102,.15);color:var(--accent2)}
-  .word-item{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:all .2s}
-  .word-item:active{transform:scale(.98)}
-  .word-viet{font-family:'Be Vietnam Pro',sans-serif;font-size:20px;font-weight:700;color:var(--accent)}
-  .word-ko{font-size:14px;color:var(--muted);margin-top:2px}
-  .word-level{display:flex;gap:3px}
-  .level-dot{width:8px;height:8px;border-radius:50%;background:var(--border)}
-  .level-dot.filled{background:var(--accent3)}
-  .word-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-  .w-btn{border-radius:10px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;border:1px solid}
-  .w-btn-edit{background:rgba(255,209,102,.15);border-color:rgba(255,209,102,.4);color:var(--accent2)}
-  .w-btn-del{background:rgba(239,71,111,.15);border-color:rgba(239,71,111,.3);color:var(--accent4)}
-  .w-btn-sound{background:rgba(6,214,160,.15);border-color:rgba(6,214,160,.3);color:var(--accent3)}
+/* ===== LANGUAGE SELECT SCREEN ===== */
+#langSelect{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;gap:0}
+#langSelect .ls-title{font-size:15px;font-weight:700;color:var(--muted);margin-bottom:8px;letter-spacing:.08em;text-transform:uppercase}
+#langSelect .ls-main{font-size:28px;font-weight:900;text-align:center;line-height:1.3;margin-bottom:8px}
+#langSelect .ls-sub{font-size:14px;color:var(--muted);text-align:center;margin-bottom:40px}
+.ls-card{width:100%;max-width:360px;border-radius:24px;padding:28px 24px;cursor:pointer;transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden;margin-bottom:16px;border:2px solid transparent}
+.ls-card:active{transform:scale(.97)}
+.ls-card-viet{background:linear-gradient(135deg,#ff6b35 0%,#ef476f 100%)}
+.ls-card-ko{background:linear-gradient(135deg,#3d91ff 0%,#6a5af9 100%)}
+.ls-card .flag{font-size:56px;margin-bottom:12px;display:block}
+.ls-card .lc-title{font-size:22px;font-weight:900;color:white;margin-bottom:6px}
+.ls-card .lc-sub{font-size:13px;color:rgba(255,255,255,.8);line-height:1.5}
+.ls-card .lc-arrow{position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:28px;opacity:.6}
+.ls-card::after{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.08)}
 
-  /* MODAL */
-  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s}
-  .modal-overlay.open{opacity:1;pointer-events:all}
-  .modal{background:var(--surface);border-radius:24px 24px 0 0;padding:24px 20px 50px;width:100%;max-width:600px;border:1px solid var(--border);border-bottom:none;transform:translateY(100%);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
-  .modal-overlay.open .modal{transform:translateY(0)}
-  .modal-title{font-size:20px;font-weight:900;margin-bottom:20px;text-align:center}
-  .field-label{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
-  .field-input{width:100%;background:var(--card);border:2px solid var(--border);border-radius:14px;padding:14px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:600;color:var(--text);outline:none;transition:border-color .2s;margin-bottom:14px}
-  .field-input:focus{border-color:var(--accent)}
-  .modal-save{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent4));border:none;border-radius:16px;padding:16px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;color:white;cursor:pointer}
-  .modal-cancel{width:100%;background:transparent;border:2px solid var(--border);border-radius:16px;padding:14px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;color:var(--muted);cursor:pointer;margin-top:10px}
-
-  .fab{position:fixed;bottom:90px;right:20px;z-index:300;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent4));border:none;font-size:26px;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(255,107,53,.4);transition:transform .2s}
-  .fab:active{transform:scale(.92)}
-  .achievement-toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-120px);background:linear-gradient(135deg,var(--accent2),var(--accent));color:#0f0e17;border-radius:20px;padding:14px 24px;font-weight:800;font-size:15px;z-index:1000;transition:transform .4s cubic-bezier(.34,1.56,.64,1);text-align:center;box-shadow:0 8px 32px rgba(255,107,53,.4);white-space:nowrap}
-  .achievement-toast.show{transform:translateX(-50%) translateY(0)}
-  .profile-header{text-align:center;padding:24px 0}
-  .avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent4));display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 12px;border:3px solid var(--accent2)}
-  .level-badge{display:inline-block;background:linear-gradient(135deg,var(--accent2),var(--accent));color:#0f0e17;font-weight:800;font-size:12px;padding:4px 14px;border-radius:20px}
-  .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:20px}
-  .cal-day{aspect-ratio:1;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--muted)}
-  .cal-day.done{background:var(--accent3);color:#0f0e17;border-color:var(--accent3)}
-  .cal-day.today{border-color:var(--accent);color:var(--accent)}
-  .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,14,23,.95);backdrop-filter:blur(20px);border-top:1px solid var(--border);z-index:200}
-  .search-input{width:100%;background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:12px 16px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:600;color:var(--text);outline:none;transition:border-color .2s;margin-bottom:14px}
-  .search-input:focus{border-color:var(--accent)}
-  .review-box{background:rgba(239,71,111,.1);border:1px solid rgba(239,71,111,.3);border-radius:16px;padding:16px;margin-bottom:14px}
-  .empty-state{text-align:center;padding:40px 20px;color:var(--muted)}
-  .empty-state .big{font-size:48px;margin-bottom:12px}
-  @keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
-
-  /* DIRECTION TOGGLE */
-  .dir-toggle{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:4px;gap:4px;margin-bottom:14px}
-  .dir-btn{flex:1;padding:10px 8px;border:none;border-radius:16px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;transition:all .2s;background:transparent;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px}
-  .dir-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent4));color:white;box-shadow:0 2px 12px rgba(255,107,53,.3)}
-  .dir-btn.active-ko{background:linear-gradient(135deg,#3d91ff,#6a5af9);box-shadow:0 2px 12px rgba(61,145,255,.3)}
-  .card-ko-main{font-size:38px;font-weight:900;line-height:1.2;margin-bottom:8px;color:var(--text)}
-  .card-viet-answer{font-family:'Be Vietnam Pro',sans-serif;font-size:26px;font-weight:700;color:var(--accent);margin-bottom:6px}
-  .ko-sound-btn{background:rgba(61,145,255,.15);border:1px solid rgba(61,145,255,.3);color:#3d91ff;border-radius:50%;width:48px;height:48px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;transition:all .2s}
-  .ko-sound-btn:active{transform:scale(.9)}
-
-  /* TXT UPLOAD MODAL */
-  .upload-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:600;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s}
-  .upload-modal-overlay.open{opacity:1;pointer-events:all}
-  .upload-modal{background:var(--surface);border-radius:24px 24px 0 0;padding:24px 20px 50px;width:100%;max-width:600px;border:1px solid var(--border);border-bottom:none;transform:translateY(100%);transition:transform .35s cubic-bezier(.34,1.56,.64,1);max-height:90vh;overflow-y:auto}
-  .upload-modal-overlay.open .upload-modal{transform:translateY(0)}
-
-  .drop-zone{border:2px dashed var(--border);border-radius:18px;padding:32px 20px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:16px;position:relative}
-  .drop-zone:hover,.drop-zone.drag{border-color:var(--accent);background:rgba(255,107,53,.05)}
-  .drop-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-  .drop-zone .dz-icon{font-size:48px;margin-bottom:12px}
-  .drop-zone .dz-title{font-size:16px;font-weight:800;margin-bottom:6px}
-  .drop-zone .dz-sub{font-size:13px;color:var(--muted);line-height:1.5}
-
-  .format-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:16px}
-  .format-box .fmt-title{font-size:12px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
-  .format-box pre{font-size:12px;color:var(--muted);line-height:1.8;font-family:monospace;white-space:pre-wrap;word-break:break-all}
-  .format-box .fmt-note{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6}
-
-  .preview-box{background:var(--card);border:1px solid var(--accent3);border-radius:14px;padding:16px;margin-bottom:16px;display:none}
-  .preview-box .pv-title{font-size:13px;font-weight:800;color:var(--accent3);margin-bottom:10px}
-  .preview-item{background:var(--surface);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:13px}
-  .preview-item .pv-viet{font-family:'Be Vietnam Pro',sans-serif;font-weight:700;color:var(--accent);font-size:15px}
-  .preview-item .pv-ko{color:var(--muted);margin-top:2px}
-  .preview-item.error{border:1px solid var(--accent4);background:rgba(239,71,111,.08)}
-  .preview-item.error .pv-err{color:var(--accent4);font-size:11px;margin-top:4px}
-
-  .upload-confirm{width:100%;background:linear-gradient(135deg,var(--accent3),#04b387);border:none;border-radius:16px;padding:16px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;color:#0f0e17;cursor:pointer;display:none}
-  .upload-cancel{width:100%;background:transparent;border:2px solid var(--border);border-radius:16px;padding:14px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;color:var(--muted);cursor:pointer;margin-top:10px}
-  .error-summary{background:rgba(239,71,111,.1);border:1px solid rgba(239,71,111,.3);border-radius:12px;padding:12px 14px;margin-bottom:12px;font-size:13px;color:var(--accent4);display:none}
+/* ===== MAIN APP ===== */
+#app{display:none;padding-bottom:90px}
+.header{position:sticky;top:0;z-index:100;background:rgba(15,14,23,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:18px;font-weight:900;display:flex;align-items:center;gap:8px}
+.streak{display:flex;align-items:center;gap:6px;background:rgba(255,107,53,.15);border:1px solid rgba(255,107,53,.3);border-radius:20px;padding:6px 12px;font-size:13px;font-weight:700}
+.back-btn{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:6px 12px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Nunito',sans-serif}
+.xp-bar-wrap{height:4px;background:var(--border)}
+.xp-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s}
+.tabs{display:flex;background:var(--surface);margin:16px;border-radius:16px;padding:4px;gap:4px;position:relative;z-index:1}
+.tab{flex:1;padding:10px 4px;border:none;background:transparent;color:var(--muted);font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;cursor:pointer;border-radius:12px;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:4px}
+.tab.active{background:var(--card);color:var(--text);box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.tab-icon{font-size:20px}
+.screen{display:none;padding:0 16px;position:relative;z-index:1}
+.screen.active{display:block}
+.stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.stat-card{background:var(--surface);border-radius:16px;padding:14px 10px;text-align:center;border:1px solid var(--border)}
+.stat-card .num{font-size:24px;font-weight:900}
+.stat-card .lbl{font-size:10px;color:var(--muted);margin-top:2px;font-weight:600}
+.daily-header{border-radius:20px;padding:20px;margin-bottom:16px;position:relative;overflow:hidden}
+.daily-header h2{font-size:18px;font-weight:800}
+.daily-header p{font-size:13px;opacity:.85;margin-top:4px}
+.progress-row{display:flex;align-items:center;gap:8px;margin-top:12px}
+.progress-track{flex:1;height:8px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:white;border-radius:4px;transition:width .4s}
+.review-box{background:rgba(239,71,111,.1);border:1px solid rgba(239,71,111,.3);border-radius:16px;padding:16px;margin-bottom:14px}
+.section-title{font-size:16px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.mode-row{display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px}
+.mode-btn{border:2px solid var(--border);background:var(--surface);color:var(--muted);border-radius:20px;padding:8px 16px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s}
+.mode-btn.active{border-color:var(--accent);background:rgba(255,107,53,.15);color:var(--accent)}
+.flashcard{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:36px 24px;text-align:center;position:relative;overflow:hidden;animation:cardIn .3s ease}
+.flashcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--card-bar,linear-gradient(90deg,var(--accent),var(--accent2)))}
+.card-category{display:inline-block;background:rgba(255,107,53,.15);color:var(--accent);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;text-transform:uppercase}
+.card-main{font-family:'Be Vietnam Pro',sans-serif;font-size:40px;font-weight:700;line-height:1.2;margin-bottom:8px}
+.card-sub{font-size:13px;color:var(--accent2);font-weight:600;margin-bottom:16px}
+.sound-btn{border-radius:50%;width:48px;height:48px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;transition:all .2s;border:1px solid}
+.sound-btn:active{transform:scale(.9)}
+.sound-viet{background:rgba(6,214,160,.15);border-color:rgba(6,214,160,.3);color:var(--accent3)}
+.sound-ko{background:rgba(61,145,255,.15);border-color:rgba(61,145,255,.3);color:#3d91ff}
+.card-hint{font-size:14px;color:var(--muted);margin-bottom:8px}
+.answer-section{margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
+.answer-main{font-size:22px;font-weight:800;color:var(--accent2);margin-bottom:8px}
+.answer-viet{font-family:'Be Vietnam Pro',sans-serif;font-size:26px;font-weight:700;color:var(--accent3);margin-bottom:8px}
+.answer-example{font-size:13px;color:var(--muted);line-height:1.5;font-family:'Be Vietnam Pro',sans-serif}
+.flip-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:20px}
+.flip-btn{border:none;border-radius:16px;padding:14px 8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;transition:all .15s}
+.flip-btn:active{transform:scale(.95)}
+.btn-again{background:rgba(239,71,111,.2);color:var(--accent4);border:2px solid var(--accent4)}
+.btn-hard{background:rgba(255,209,102,.15);color:var(--accent2);border:2px solid rgba(255,209,102,.4)}
+.btn-good{background:rgba(6,214,160,.2);color:var(--accent3);border:2px solid var(--accent3)}
+.quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.quiz-opt{background:var(--surface);border:2px solid var(--border);border-radius:16px;padding:16px 10px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;color:var(--text);cursor:pointer;transition:all .15s;text-align:center;line-height:1.3}
+.quiz-opt:active{transform:scale(.97)}
+.quiz-opt.correct{background:rgba(6,214,160,.2);border-color:var(--accent3);color:var(--accent3)}
+.quiz-opt.wrong{background:rgba(239,71,111,.2);border-color:var(--accent4);color:var(--accent4)}
+.quiz-opt.reveal{background:rgba(6,214,160,.1);border-color:rgba(6,214,160,.3)}
+.type-input{width:100%;background:var(--surface);border:2px solid var(--border);border-radius:16px;padding:16px;font-family:'Be Vietnam Pro',sans-serif;font-size:18px;font-weight:700;color:var(--text);text-align:center;outline:none;transition:border-color .2s;margin-top:16px}
+.type-input:focus{border-color:var(--accent)}
+.type-input.correct{border-color:var(--accent3);background:rgba(6,214,160,.1)}
+.type-input.wrong{border-color:var(--accent4);background:rgba(239,71,111,.1)}
+.submit-btn{width:100%;border:none;border-radius:16px;padding:16px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;color:white;cursor:pointer;margin-top:10px;transition:transform .15s}
+.submit-btn:active{transform:scale(.98)}
+.combo-display{text-align:center;font-size:13px;color:var(--muted);margin-bottom:10px}
+.combo-display span{color:var(--accent2);font-weight:800;font-size:18px}
+.cat-select{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px}
+.cat-pill{border:2px solid var(--border);background:var(--surface);color:var(--muted);border-radius:20px;padding:7px 14px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.cat-pill.active{border-color:var(--accent2);background:rgba(255,209,102,.15);color:var(--accent2)}
+.word-item{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:all .2s}
+.word-item:active{transform:scale(.98)}
+.word-main{font-family:'Be Vietnam Pro',sans-serif;font-size:20px;font-weight:700;color:var(--accent)}
+.word-sub{font-size:14px;color:var(--muted);margin-top:2px}
+.word-level{display:flex;gap:3px}
+.level-dot{width:8px;height:8px;border-radius:50%;background:var(--border)}
+.level-dot.filled{background:var(--accent3)}
+.word-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.w-btn{border-radius:10px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;border:1px solid}
+.w-btn-edit{background:rgba(255,209,102,.15);border-color:rgba(255,209,102,.4);color:var(--accent2)}
+.w-btn-del{background:rgba(239,71,111,.15);border-color:rgba(239,71,111,.3);color:var(--accent4)}
+.w-btn-sound{background:rgba(6,214,160,.15);border-color:rgba(6,214,160,.3);color:var(--accent3)}
+.search-input{width:100%;background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:12px 16px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:600;color:var(--text);outline:none;transition:border-color .2s;margin-bottom:14px}
+.search-input:focus{border-color:var(--accent)}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted)}
+.empty-state .big{font-size:48px;margin-bottom:12px}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--surface);border-radius:24px 24px 0 0;padding:24px 20px 50px;width:100%;max-width:600px;border:1px solid var(--border);border-bottom:none;transform:translateY(100%);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal-title{font-size:20px;font-weight:900;margin-bottom:20px;text-align:center}
+.field-label{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+.field-input{width:100%;background:var(--card);border:2px solid var(--border);border-radius:14px;padding:14px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:600;color:var(--text);outline:none;transition:border-color .2s;margin-bottom:14px}
+.field-input:focus{border-color:var(--accent)}
+.modal-save{width:100%;border:none;border-radius:16px;padding:16px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;color:white;cursor:pointer}
+.modal-cancel{width:100%;background:transparent;border:2px solid var(--border);border-radius:16px;padding:14px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;color:var(--muted);cursor:pointer;margin-top:10px}
+.upload-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:600;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s}
+.upload-modal-overlay.open{opacity:1;pointer-events:all}
+.upload-modal{background:var(--surface);border-radius:24px 24px 0 0;padding:24px 20px 50px;width:100%;max-width:600px;border:1px solid var(--border);border-bottom:none;transform:translateY(100%);transition:transform .35s cubic-bezier(.34,1.56,.64,1);max-height:90vh;overflow-y:auto}
+.upload-modal-overlay.open .upload-modal{transform:translateY(0)}
+.drop-zone{border:2px dashed var(--border);border-radius:18px;padding:32px 20px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:16px;position:relative}
+.drop-zone:hover,.drop-zone.drag{border-color:var(--accent);background:rgba(255,107,53,.05)}
+.drop-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop-zone .dz-icon{font-size:48px;margin-bottom:12px}
+.drop-zone .dz-title{font-size:16px;font-weight:800;margin-bottom:6px}
+.drop-zone .dz-sub{font-size:13px;color:var(--muted);line-height:1.5}
+.format-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:16px}
+.format-box .fmt-title{font-size:12px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+.format-box pre{font-size:12px;color:var(--muted);line-height:1.8;font-family:monospace;white-space:pre-wrap;word-break:break-all}
+.format-box .fmt-note{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6}
+.preview-box{background:var(--card);border:1px solid var(--accent3);border-radius:14px;padding:16px;margin-bottom:16px;display:none}
+.preview-box .pv-title{font-size:13px;font-weight:800;color:var(--accent3);margin-bottom:10px}
+.preview-item{background:var(--surface);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:13px}
+.preview-item .pv-main{font-family:'Be Vietnam Pro',sans-serif;font-weight:700;color:var(--accent);font-size:15px}
+.preview-item.error{border:1px solid var(--accent4);background:rgba(239,71,111,.08)}
+.preview-item.error .pv-err{color:var(--accent4);font-size:11px;margin-top:4px}
+.upload-confirm{width:100%;background:linear-gradient(135deg,var(--accent3),#04b387);border:none;border-radius:16px;padding:16px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;color:#0f0e17;cursor:pointer;display:none}
+.upload-cancel{width:100%;background:transparent;border:2px solid var(--border);border-radius:16px;padding:14px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;color:var(--muted);cursor:pointer;margin-top:10px}
+.error-summary{background:rgba(239,71,111,.1);border:1px solid rgba(239,71,111,.3);border-radius:12px;padding:12px 14px;margin-bottom:12px;font-size:13px;color:var(--accent4);display:none}
+.fab{position:fixed;bottom:90px;right:20px;z-index:300;width:56px;height:56px;border-radius:50%;border:none;font-size:26px;color:white;cursor:pointer;display:none;align-items:center;justify-content:center;transition:transform .2s;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.fab:active{transform:scale(.92)}
+.fab-add{background:linear-gradient(135deg,var(--accent),var(--accent4));box-shadow:0 4px 20px rgba(255,107,53,.4)}
+.fab-upload{bottom:154px;background:linear-gradient(135deg,var(--accent3),#04b387);box-shadow:0 4px 20px rgba(6,214,160,.4);font-size:22px}
+.achievement-toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-120px);background:linear-gradient(135deg,var(--accent2),var(--accent));color:#0f0e17;border-radius:20px;padding:14px 24px;font-weight:800;font-size:15px;z-index:1000;transition:transform .4s cubic-bezier(.34,1.56,.64,1);text-align:center;box-shadow:0 8px 32px rgba(255,107,53,.4);white-space:nowrap}
+.achievement-toast.show{transform:translateX(-50%) translateY(0)}
+.profile-header{text-align:center;padding:24px 0}
+.avatar{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 12px;border:3px solid var(--accent2)}
+.level-badge{display:inline-block;background:linear-gradient(135deg,var(--accent2),var(--accent));color:#0f0e17;font-weight:800;font-size:12px;padding:4px 14px;border-radius:20px}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:20px}
+.cal-day{aspect-ratio:1;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--muted)}
+.cal-day.done{background:var(--accent3);color:#0f0e17;border-color:var(--accent3)}
+.cal-day.today{border-color:var(--accent);color:var(--accent)}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,14,23,.95);backdrop-filter:blur(20px);border-top:1px solid var(--border);z-index:200}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.ls-card{animation:fadeIn .4s ease both}
+.ls-card:nth-child(2){animation-delay:.1s}
 </style>
 </head>
 <body>
 
-<div class="achievement-toast" id="toast"></div>
+<!-- ===== LANGUAGE SELECT ===== -->
+<div id="langSelect">
+  <div class="ls-title">Welcome / 환영합니다 / Chào mừng</div>
+  <div class="ls-main">어떤 언어를 공부할까요?<br><span style="font-size:20px;color:var(--muted)">Bạn muốn học ngôn ngữ nào?</span></div>
+  <div class="ls-sub" style="margin-bottom:40px"></div>
 
-<!-- TXT UPLOAD MODAL -->
+  <div class="ls-card ls-card-viet" onclick="selectLang('viet')">
+    <span class="flag">🇰🇷</span>
+    <div class="lc-title">베트남어 공부</div>
+    <div class="lc-sub">한국인이 베트남어를 배워요<br>Người Hàn học tiếng Việt</div>
+    <div class="lc-arrow">→</div>
+  </div>
+
+  <div class="ls-card ls-card-ko" onclick="selectLang('ko')">
+    <span class="flag">🇻🇳</span>
+    <div class="lc-title">Học tiếng Hàn</div>
+    <div class="lc-sub">Người Việt học tiếng Hàn<br>베트남인이 한국어를 배워요</div>
+    <div class="lc-arrow">→</div>
+  </div>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div id="app">
+
+<!-- UPLOAD MODAL -->
 <div class="upload-modal-overlay" id="uploadOverlay" onclick="closeUploadBg(event)">
   <div class="upload-modal">
-    <div style="font-size:20px;font-weight:900;text-align:center;margin-bottom:20px">📂 TXT 파일로 단어 추가</div>
-
-    <!-- Format guide -->
+    <div style="font-size:20px;font-weight:900;text-align:center;margin-bottom:20px" id="uploadTitle">📂 파일로 단어 추가</div>
     <div class="format-box">
-      <div class="fmt-title">📋 TXT 파일 작성 형식</div>
-      <pre>베트남어 | 한국어뜻 | 발음 | 카테고리 | 예문
-
-Xin chào | 안녕하세요 | 씬 짜오 | 인사 | Xin chào! (안녕!)
-Cảm ơn | 감사합니다 | 깜 언 | 인사
-Phở | 쌀국수 | 퍼 | 음식 | Phở bò ngon! (맛있는 소고기 쌀국수!)
-Đẹp | 예쁘다 | 댑 | 일상</pre>
-      <div class="fmt-note">
-        ✅ 구분자: <strong>|</strong> (세로줄)<br>
-        ✅ 필수: 베트남어, 한국어뜻<br>
-        ✅ 선택: 발음, 카테고리, 예문 (없으면 비워도 됨)<br>
-        ✅ 한 줄에 단어 하나, # 으로 시작하는 줄은 주석(무시)
-      </div>
+      <div class="fmt-title" id="fmtTitle">📋 TXT 파일 형식</div>
+      <pre id="fmtExample"></pre>
+      <div class="fmt-note" id="fmtNote"></div>
     </div>
-
-    <!-- Drop zone -->
     <div class="drop-zone" id="dropZone">
       <input type="file" accept=".txt,text/plain" id="fileInput" onchange="handleFile(event)">
       <div class="dz-icon">📄</div>
-      <div class="dz-title">TXT 파일을 선택하세요</div>
-      <div class="dz-sub">탭해서 파일 선택<br>또는 여기로 파일을 끌어다 놓으세요</div>
+      <div class="dz-title" id="dzTitle">TXT 파일을 선택하세요</div>
+      <div class="dz-sub" id="dzSub">탭해서 파일 선택</div>
     </div>
-
-    <!-- Error summary -->
     <div class="error-summary" id="errorSummary"></div>
-
-    <!-- Preview -->
     <div class="preview-box" id="previewBox">
       <div class="pv-title" id="previewTitle">미리보기</div>
       <div id="previewList"></div>
     </div>
-
     <button class="upload-confirm" id="uploadConfirmBtn" onclick="confirmUpload()">✅ 단어 추가하기</button>
-    <button class="upload-cancel" onclick="closeUpload()">취소</button>
+    <button class="upload-cancel" onclick="closeUpload()" id="uploadCancelBtn">취소</button>
   </div>
 </div>
 
-<!-- MODAL -->
+<!-- ADD WORD MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalBg(event)">
   <div class="modal">
     <div class="modal-title" id="modalTitle">➕ 단어 추가</div>
-    <div class="field-label">베트남어 *</div>
-    <input class="field-input" id="fViet" placeholder="예: Xin chào" autocorrect="off" spellcheck="false">
-    <div class="field-label">발음 (한국어 표기)</div>
-    <input class="field-input" id="fTone" placeholder="예: 씬 짜오">
-    <div class="field-label">한국어 뜻 *</div>
-    <input class="field-input" id="fKo" placeholder="예: 안녕하세요">
-    <div class="field-label">카테고리</div>
-    <input class="field-input" id="fCat" placeholder="예: 인사, 음식, 여행...">
-    <div class="field-label">예문 (선택)</div>
-    <input class="field-input" id="fEx" placeholder="예: Xin chào! (안녕하세요!)">
-    <button class="modal-save" onclick="saveWord()">💾 저장</button>
-    <button class="modal-cancel" onclick="closeModal()">취소</button>
+    <div class="field-label" id="fl1"></div>
+    <input class="field-input" id="fMain" autocorrect="off" spellcheck="false">
+    <div class="field-label" id="fl2"></div>
+    <input class="field-input" id="fSub" autocorrect="off" spellcheck="false">
+    <div class="field-label" id="fl3"></div>
+    <input class="field-input" id="fTone" autocorrect="off" spellcheck="false">
+    <div class="field-label" id="fl4"></div>
+    <input class="field-input" id="fCat">
+    <div class="field-label" id="fl5"></div>
+    <input class="field-input" id="fEx">
+    <button class="modal-save" id="modalSaveBtn" onclick="saveWord()">💾 저장</button>
+    <button class="modal-cancel" onclick="closeModal()" id="modalCancelBtn">취소</button>
   </div>
 </div>
 
+<div class="achievement-toast" id="toast"></div>
+
 <header class="header">
-  <div class="logo">🇻🇳 <span>Việt</span>어장</div>
-  <div class="streak">🔥 <span id="streakNum">0</span>일</div>
+  <div class="logo" id="appLogo"></div>
+  <div style="display:flex;gap:8px;align-items:center">
+    <div class="streak">🔥 <span id="streakNum">0</span></div>
+    <button class="back-btn" onclick="goBack()" id="backBtn">⬅</button>
+  </div>
 </header>
 <div class="xp-bar-wrap"><div class="xp-bar" id="xpBar" style="width:0%"></div></div>
 
@@ -237,51 +250,45 @@ Phở | 쌀국수 | 퍼 | 음식 | Phở bò ngon! (맛있는 소고기 쌀국�
 <div class="screen active" id="screen-home">
   <br>
   <div class="stats-row">
-    <div class="stat-card"><div class="num" id="statTotal" style="color:var(--accent)">0</div><div class="lbl">총 단어</div></div>
-    <div class="stat-card"><div class="num" id="statLearned" style="color:var(--accent3)">0</div><div class="lbl">암기완료</div></div>
+    <div class="stat-card"><div class="num" id="statTotal" style="color:var(--accent)">0</div><div class="lbl" id="lbl-total">총 단어</div></div>
+    <div class="stat-card"><div class="num" id="statLearned" style="color:var(--accent3)">0</div><div class="lbl" id="lbl-learned">암기완료</div></div>
     <div class="stat-card"><div class="num" id="statXP" style="color:var(--accent2)">0</div><div class="lbl">XP</div></div>
   </div>
-  <div class="daily-header">
-    <h2>오늘의 학습 목표</h2>
-    <p>오늘 20개 단어를 공부해보세요!</p>
+  <div class="daily-header" id="dailyHeader">
+    <h2 id="dailyTitle"></h2>
+    <p id="dailyDesc"></p>
     <div class="progress-row">
       <div class="progress-track"><div class="progress-fill" id="dailyProgress" style="width:0%"></div></div>
       <span id="dailyCount" style="font-size:12px;font-weight:800">0/20</span>
     </div>
   </div>
   <div class="review-box">
-    <div style="font-weight:800;margin-bottom:4px">⏰ 복습 대기 중</div>
-    <div style="font-size:13px;color:var(--muted)" id="reviewCount">계산 중...</div>
+    <div style="font-weight:800;margin-bottom:4px" id="reviewTitle">⏰ 복습 대기 중</div>
+    <div style="font-size:13px;color:var(--muted)" id="reviewCount"></div>
   </div>
-  <button onclick="switchTab('learn')" style="width:100%;background:linear-gradient(135deg,var(--accent),var(--accent4));border:none;border-radius:18px;padding:18px;font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:white;cursor:pointer;margin-bottom:10px">🎮 지금 학습 시작!</button>
+  <button onclick="switchTab('learn')" id="startBtn" style="width:100%;border:none;border-radius:18px;padding:18px;font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:white;cursor:pointer;margin-bottom:10px"></button>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
-    <button onclick="openModal()" style="background:var(--surface);border:2px solid var(--border);border-radius:18px;padding:15px 8px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--text);cursor:pointer">✏️ 단어 직접 추가</button>
-    <button onclick="openUpload()" style="background:rgba(6,214,160,.15);border:2px solid rgba(6,214,160,.4);border-radius:18px;padding:15px 8px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--accent3);cursor:pointer">📂 TXT 파일 업로드</button>
+    <button onclick="openModal()" id="addWordBtn" style="background:var(--surface);border:2px solid var(--border);border-radius:18px;padding:15px 8px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--text);cursor:pointer"></button>
+    <button onclick="openUpload()" id="uploadBtn" style="background:rgba(6,214,160,.15);border:2px solid rgba(6,214,160,.4);border-radius:18px;padding:15px 8px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--accent3);cursor:pointer"></button>
   </div>
 </div>
 
 <!-- LEARN -->
 <div class="screen" id="screen-learn">
   <br>
-  <!-- Direction toggle -->
-  <div class="dir-toggle">
-    <button class="dir-btn active" id="dir-vk" onclick="setDir('vk')">🇻🇳 베트남어 → 🇰🇷 한국어</button>
-    <button class="dir-btn" id="dir-kv" onclick="setDir('kv')">🇰🇷 한국어 → 🇻🇳 베트남어</button>
-  </div>
-  <!-- Mode -->
   <div class="mode-row">
-    <button class="mode-btn active" id="mode-flash" onclick="setMode('flash')">🃏 플래시카드</button>
-    <button class="mode-btn" id="mode-quiz" onclick="setMode('quiz')">🎯 퀴즈</button>
-    <button class="mode-btn" id="mode-type" onclick="setMode('type')">⌨️ 받아쓰기</button>
+    <button class="mode-btn active" id="mode-flash" onclick="setMode('flash')"></button>
+    <button class="mode-btn" id="mode-quiz" onclick="setMode('quiz')"></button>
+    <button class="mode-btn" id="mode-type" onclick="setMode('type')"></button>
   </div>
-  <div class="combo-display">연속 정답: <span id="comboNum">0</span> 🔥</div>
+  <div class="combo-display" id="comboLabel"></div>
   <div id="gameArea"></div>
 </div>
 
 <!-- WORDS -->
 <div class="screen" id="screen-words">
   <br>
-  <input class="search-input" id="searchInput" placeholder="🔍 단어 검색..." oninput="renderWordList()">
+  <input class="search-input" id="searchInput" oninput="renderWordList()">
   <div class="cat-select" id="filterCats"></div>
   <div id="wordList"></div>
 </div>
@@ -289,119 +296,330 @@ Phở | 쌀국수 | 퍼 | 음식 | Phở bò ngon! (맛있는 소고기 쌀국�
 <!-- PROFILE -->
 <div class="screen" id="screen-profile">
   <div class="profile-header">
-    <div class="avatar">🦁</div>
-    <div style="font-size:22px;font-weight:900;margin-bottom:6px">베트남어 학습자</div>
-    <div class="level-badge" id="levelBadge">LV.1 초보자</div>
+    <div class="avatar" id="profileAvatar" style="background:linear-gradient(135deg,var(--accent),var(--accent4))"><span id="profileAvatarIcon">🌏</span></div>
+    <div style="font-size:22px;font-weight:900;margin-bottom:6px" id="profileName"></div>
+    <div class="level-badge" id="levelBadge">LV.1</div>
   </div>
   <div class="stats-row" style="margin-bottom:20px">
-    <div class="stat-card"><div class="num" id="pStreak" style="color:var(--accent)">0</div><div class="lbl">연속 일수</div></div>
-    <div class="stat-card"><div class="num" id="pCorrect" style="color:var(--accent3)">0</div><div class="lbl">정답 수</div></div>
-    <div class="stat-card"><div class="num" id="pXP" style="color:var(--accent2)">0</div><div class="lbl">총 XP</div></div>
+    <div class="stat-card"><div class="num" id="pStreak" style="color:var(--accent)">0</div><div class="lbl" id="pStreakLbl"></div></div>
+    <div class="stat-card"><div class="num" id="pCorrect" style="color:var(--accent3)">0</div><div class="lbl" id="pCorrectLbl"></div></div>
+    <div class="stat-card"><div class="num" id="pXP" style="color:var(--accent2)">0</div><div class="lbl">XP</div></div>
   </div>
-  <div class="section-title">📅 학습 캘린더 (최근 21일)</div>
+  <div class="section-title" id="calTitle"></div>
   <div class="calendar-grid" id="calendarGrid"></div>
-  <div class="section-title">🏆 업적</div>
+  <div class="section-title" id="achTitle"></div>
   <div id="achievementList"></div>
 </div>
 
-<button class="fab" id="fabBtn" onclick="openModal()">＋</button>
-<button class="fab" id="fabUploadBtn" onclick="openUpload()" style="bottom:154px;background:linear-gradient(135deg,var(--accent3),#04b387);box-shadow:0 4px 20px rgba(6,214,160,.4);font-size:22px">📂</button>
+<button class="fab fab-add" id="fabAdd" onclick="openModal()">＋</button>
+<button class="fab fab-upload" id="fabUpload" onclick="openUpload()">📂</button>
 
 <nav class="bottom-nav">
   <div class="tabs">
-    <button class="tab active" id="tab-home" onclick="switchTab('home')"><span class="tab-icon">🏠</span>홈</button>
-    <button class="tab" id="tab-learn" onclick="switchTab('learn')"><span class="tab-icon">🎮</span>학습</button>
-    <button class="tab" id="tab-words" onclick="switchTab('words')"><span class="tab-icon">📖</span>단어장</button>
-    <button class="tab" id="tab-profile" onclick="switchTab('profile')"><span class="tab-icon">👤</span>프로필</button>
+    <button class="tab active" id="tab-home" onclick="switchTab('home')"><span class="tab-icon" id="tabIcon0">🏠</span><span id="tabLbl0"></span></button>
+    <button class="tab" id="tab-learn" onclick="switchTab('learn')"><span class="tab-icon" id="tabIcon1">🎮</span><span id="tabLbl1"></span></button>
+    <button class="tab" id="tab-words" onclick="switchTab('words')"><span class="tab-icon" id="tabIcon2">📖</span><span id="tabLbl2"></span></button>
+    <button class="tab" id="tab-profile" onclick="switchTab('profile')"><span class="tab-icon" id="tabIcon3">👤</span><span id="tabLbl3"></span></button>
   </div>
 </nav>
 
+</div><!-- #app -->
+
 <script>
-// ===== DEFAULT WORDS =====
+// ============================================================
+// UI STRINGS — 언어별 텍스트
+// ============================================================
+const UI = {
+  viet: { // 한국인이 베트남어 공부 — UI는 한국어
+    lang:'ko', learnLang:'vi',
+    logo:'🇻🇳 Việt어장',
+    dailyTitle:'오늘의 학습 목표', dailyDesc:'베트남어 단어 20개를 공부해보세요!',
+    reviewTitle:'⏰ 복습 대기 중',
+    startBtn:'🎮 지금 학습 시작!',
+    addWordBtn:'✏️ 단어 직접 추가', uploadBtn:'📂 TXT 파일 업로드',
+    tabLbls:['홈','학습','단어장','프로필'],
+    lblTotal:'총 단어', lblLearned:'암기완료',
+    modeFlash:'🃏 플래시카드', modeQuiz:'🎯 퀴즈', modeType:'⌨️ 받아쓰기',
+    comboLabel:'연속 정답: {n} 🔥',
+    cardHintFlash:'탭해서 뜻 보기 👆',
+    cardHintQuiz:'뜻을 고르세요',
+    cardHintType:'한국어 뜻을 보고 베트남어로 입력하세요',
+    soundMain:'🔊 베트남어', soundAnswer:'🔊 한국어',
+    btnAgain:'😵 모름', btnHard:'😅 어려움', btnGood:'😊 알았음!',
+    typeInput:'베트남어 입력...', confirm:'확인 ✓',
+    searchInput:'🔍 단어 검색...',
+    profileName:'베트남어 학습자', profileAvatar:'🇻🇳',
+    pStreakLbl:'연속 일수', pCorrectLbl:'정답 수',
+    calTitle:'📅 학습 캘린더 (최근 21일)', achTitle:'🏆 업적',
+    modalAddTitle:'➕ 단어 추가', modalEditTitle:'✏️ 단어 수정',
+    fl1:'베트남어 *', fl2:'한국어 뜻 *', fl3:'발음 (한국어 표기)', fl4:'카테고리', fl5:'예문',
+    fMainPH:'예: Xin chào', fSubPH:'예: 안녕하세요', fTonePH:'예: 씬 짜오', fCatPH:'예: 인사, 음식', fExPH:'예: Xin chào! (안녕!)',
+    modalSave:'💾 저장', modalCancel:'취소',
+    uploadTitle:'📂 TXT 파일로 단어 추가',
+    fmtTitle:'📋 TXT 파일 형식',
+    fmtExample:'베트남어 | 한국어뜻 | 발음 | 카테고리 | 예문\n\nXin chào | 안녕하세요 | 씬 짜오 | 인사 | Xin chào!\nPhở | 쌀국수 | 퍼 | 음식',
+    fmtNote:'✅ 구분자: | (세로줄)  ✅ 필수: 베트남어, 한국어뜻  ✅ #으로 시작하면 주석',
+    dzTitle:'TXT 파일을 선택하세요', dzSub:'탭해서 파일 선택',
+    uploadCancel:'취소',
+    levelNames:['초보자','입문자','학습자','중급자','상급자','전문가'],
+    achievements:[
+      {id:'first',icon:'🎉',title:'첫 시작!',desc:'첫 번째 단어를 공부했습니다'},
+      {id:'streak3',icon:'🔥',title:'3일 연속!',desc:'3일 연속 공부했습니다'},
+      {id:'streak7',icon:'⚡',title:'일주일 연속!',desc:'7일 연속 공부했습니다'},
+      {id:'words10',icon:'📚',title:'10개 달성!',desc:'10개 답을 맞혔습니다'},
+      {id:'words50',icon:'🏆',title:'50개 달성!',desc:'50개 답을 맞혔습니다'},
+      {id:'combo5',icon:'💥',title:'콤보 마스터!',desc:'5연속 정답!'},
+      {id:'xp100',icon:'⭐',title:'XP 100!',desc:'100 XP를 획득했습니다'},
+      {id:'added',icon:'✍️',title:'나만의 단어!',desc:'직접 단어를 추가했습니다'},
+    ],
+    quizOptFont:'',
+    // word fields: main=viet, sub=ko
+    mainField:'viet', subField:'ko', toneField:'tone',
+    mainLang:'vi', subLang:'ko',
+    dailyBg:'linear-gradient(135deg,#ff6b35,#ef476f)',
+    dailyBgFlag:'🇻🇳',
+  },
+  ko: { // 베트남인이 한국어 공부 — UI는 베트남어
+    lang:'vi', learnLang:'ko',
+    logo:'🇰🇷 Tiếng Hàn',
+    dailyTitle:'Mục tiêu học tập hôm nay', dailyDesc:'Hãy học 20 từ tiếng Hàn hôm nay!',
+    reviewTitle:'⏰ Từ cần ôn tập',
+    startBtn:'🎮 Bắt đầu học ngay!',
+    addWordBtn:'✏️ Thêm từ thủ công', uploadBtn:'📂 Tải lên file TXT',
+    tabLbls:['Trang chủ','Học','Từ điển','Hồ sơ'],
+    lblTotal:'Tổng từ', lblLearned:'Đã thuộc',
+    modeFlash:'🃏 Flashcard', modeQuiz:'🎯 Trắc nghiệm', modeType:'⌨️ Điền từ',
+    comboLabel:'Trả lời đúng liên tiếp: {n} 🔥',
+    cardHintFlash:'Nhấn để xem nghĩa 👆',
+    cardHintQuiz:'Chọn nghĩa đúng',
+    cardHintType:'Nhìn nghĩa tiếng Việt và nhập tiếng Hàn',
+    soundMain:'🔊 Tiếng Hàn', soundAnswer:'🔊 Tiếng Việt',
+    btnAgain:'😵 Không biết', btnHard:'😅 Khó', btnGood:'😊 Biết rồi!',
+    typeInput:'Nhập tiếng Hàn...', confirm:'Xác nhận ✓',
+    searchInput:'🔍 Tìm từ...',
+    profileName:'Người học tiếng Hàn', profileAvatar:'🇰🇷',
+    pStreakLbl:'Ngày liên tiếp', pCorrectLbl:'Số câu đúng',
+    calTitle:'📅 Lịch học (21 ngày gần đây)', achTitle:'🏆 Thành tích',
+    modalAddTitle:'➕ Thêm từ mới', modalEditTitle:'✏️ Sửa từ',
+    fl1:'Tiếng Hàn *', fl2:'Nghĩa tiếng Việt *', fl3:'Phát âm (tiếng Việt)', fl4:'Danh mục', fl5:'Ví dụ',
+    fMainPH:'VD: 안녕하세요', fSubPH:'VD: Xin chào', fTonePH:'VD: an nhyeong ha se yo', fCatPH:'VD: Chào hỏi, Ẩm thực', fExPH:'VD: 안녕하세요! (Xin chào!)',
+    modalSave:'💾 Lưu', modalCancel:'Hủy',
+    uploadTitle:'📂 Thêm từ qua file TXT',
+    fmtTitle:'📋 Định dạng file TXT',
+    fmtExample:'Tiếng Hàn | Nghĩa tiếng Việt | Phát âm | Danh mục | Ví dụ\n\n안녕하세요 | Xin chào | an nhyeong ha se yo | Chào hỏi | 안녕하세요!\n감사합니다 | Cảm ơn | gam sa ham ni da | Chào hỏi',
+    fmtNote:'✅ Dấu phân cách: | ✅ Bắt buộc: Tiếng Hàn, Nghĩa tiếng Việt ✅ Dòng bắt đầu bằng # là ghi chú',
+    dzTitle:'Chọn file TXT', dzSub:'Nhấn để chọn file',
+    uploadCancel:'Hủy',
+    levelNames:['Mới bắt đầu','Sơ cấp','Học viên','Trung cấp','Nâng cao','Chuyên gia'],
+    achievements:[
+      {id:'first',icon:'🎉',title:'Bắt đầu rồi!',desc:'Đã học từ đầu tiên'},
+      {id:'streak3',icon:'🔥',title:'3 ngày liên tiếp!',desc:'Học 3 ngày liên tiếp'},
+      {id:'streak7',icon:'⚡',title:'Một tuần liên tiếp!',desc:'Học 7 ngày liên tiếp'},
+      {id:'words10',icon:'📚',title:'10 từ đúng!',desc:'Trả lời đúng 10 từ'},
+      {id:'words50',icon:'🏆',title:'50 từ đúng!',desc:'Trả lời đúng 50 từ'},
+      {id:'combo5',icon:'💥',title:'Combo xuất sắc!',desc:'5 câu đúng liên tiếp!'},
+      {id:'xp100',icon:'⭐',title:'100 XP!',desc:'Đạt 100 XP'},
+      {id:'added',icon:'✍️',title:'Từ của riêng tôi!',desc:'Đã tự thêm từ mới'},
+    ],
+    quizOptFont:'',
+    mainField:'ko', subField:'viet', toneField:'tone',
+    mainLang:'ko', subLang:'vi',
+    dailyBg:'linear-gradient(135deg,#3d91ff,#6a5af9)',
+    dailyBgFlag:'🇰🇷',
+  }
+};
+
+// ============================================================
+// DEFAULT VOCABULARY (shared — both modes use same words)
+// ============================================================
 const DEFAULT_VOCAB = [
-  {id:1,viet:'Xin chào',ko:'안녕하세요',tone:'씬 짜오',cat:'인사',example:'Xin chào! Rất vui được gặp bạn. (안녕하세요! 만나서 반가워요.)'},
-  {id:2,viet:'Cảm ơn',ko:'감사합니다',tone:'깜 언',cat:'인사',example:'Cảm ơn rất nhiều! (정말 감사합니다!)'},
-  {id:3,viet:'Xin lỗi',ko:'죄송합니다',tone:'씬 로이',cat:'인사',example:'Xin lỗi, tôi không biết. (죄송합니다, 모릅니다.)'},
-  {id:4,viet:'Tạm biệt',ko:'안녕히 가세요',tone:'땀 비엣',cat:'인사',example:'Tạm biệt! Hẹn gặp lại! (안녕히! 다시 만나요!)'},
-  {id:5,viet:'Vâng',ko:'네',tone:'방',cat:'인사',example:'Vâng, tôi hiểu. (네, 이해합니다.)'},
-  {id:6,viet:'Không',ko:'아니요',tone:'콩',cat:'인사',example:'Không, cảm ơn. (아니요, 괜찮습니다.)'},
-  {id:7,viet:'Bạn khỏe không?',ko:'잘 지내셨나요?',tone:'반 쾌 콩',cat:'인사',example:'Bạn khỏe không? - Tôi khỏe! (잘 지내요? - 잘 지내요!)'},
-  {id:8,viet:'Không sao',ko:'괜찮아요',tone:'콩 싸오',cat:'인사',example:'- Xin lỗi! - Không sao! (- 죄송해요! - 괜찮아요!)'},
-  {id:9,viet:'Một',ko:'1 (일)',tone:'못',cat:'숫자',example:'Một cái bánh. (빵 한 개.)'},
-  {id:10,viet:'Hai',ko:'2 (이)',tone:'하이',cat:'숫자',example:'Hai người. (두 사람.)'},
-  {id:11,viet:'Ba',ko:'3 (삼)',tone:'바',cat:'숫자',example:'Ba ngày. (3일.)'},
-  {id:12,viet:'Bốn',ko:'4 (사)',tone:'본',cat:'숫자',example:'Bốn mùa. (4계절.)'},
-  {id:13,viet:'Năm',ko:'5 (오)',tone:'남',cat:'숫자',example:'Năm trăm đồng. (500동.)'},
-  {id:14,viet:'Sáu',ko:'6 (육)',tone:'싸우',cat:'숫자',example:'Sáu giờ sáng. (아침 6시.)'},
-  {id:15,viet:'Bảy',ko:'7 (칠)',tone:'바이',cat:'숫자',example:'Bảy ngày một tuần. (일주일은 7일.)'},
-  {id:16,viet:'Tám',ko:'8 (팔)',tone:'땀',cat:'숫자',example:'Tám giờ tối. (저녁 8시.)'},
-  {id:17,viet:'Chín',ko:'9 (구)',tone:'찐',cat:'숫자',example:'Chín trăm. (900.)'},
-  {id:18,viet:'Mười',ko:'10 (십)',tone:'므어이',cat:'숫자',example:'Mười người. (10명.)'},
-  {id:19,viet:'Trăm',ko:'100 (백)',tone:'짬',cat:'숫자',example:'Một trăm đồng. (100동.)'},
-  {id:20,viet:'Nghìn',ko:'1000 (천)',tone:'응인',cat:'숫자',example:'Một nghìn đồng. (1000동.)'},
-  {id:21,viet:'Phở',ko:'쌀국수',tone:'퍼',cat:'음식',example:'Một tô phở bò. (소고기 쌀국수 한 그릇.)'},
-  {id:22,viet:'Cơm',ko:'밥',tone:'껌',cat:'음식',example:'Ăn cơm chưa? (밥 먹었어요?)'},
-  {id:23,viet:'Nước',ko:'물',tone:'느억',cat:'음식',example:'Cho tôi một ly nước. (물 한 잔 주세요.)'},
-  {id:24,viet:'Cà phê',ko:'커피',tone:'까 페',cat:'음식',example:'Cà phê sữa đá, làm ơn. (아이스 밀크커피 주세요.)'},
-  {id:25,viet:'Ngon',ko:'맛있다',tone:'응온',cat:'음식',example:'Món này ngon lắm! (이 음식 정말 맛있어요!)'},
-  {id:26,viet:'Bánh mì',ko:'바게트 빵',tone:'바잉 미',cat:'음식',example:'Bánh mì thịt rất ngon. (고기 바게트가 맛있어.)'},
-  {id:27,viet:'Bia',ko:'맥주',tone:'비아',cat:'음식',example:'Một chai bia. (맥주 한 병.)'},
-  {id:28,viet:'Thịt',ko:'고기',tone:'팃',cat:'음식',example:'Thịt lợn hay thịt bò? (돼지고기 아니면 소고기?)'},
-  {id:29,viet:'Trái cây',ko:'과일',tone:'짜이 까이',cat:'음식',example:'Tôi thích trái cây. (과일을 좋아해요.)'},
-  {id:30,viet:'Cay',ko:'맵다',tone:'까이',cat:'음식',example:'Món này cay quá! (이 음식 너무 매워요!)'},
-  {id:31,viet:'Ngọt',ko:'달다',tone:'응옷',cat:'음식',example:'Trái cây rất ngọt. (과일이 매우 달아요.)'},
-  {id:32,viet:'Mặn',ko:'짜다',tone:'만',cat:'음식',example:'Canh này mặn quá. (이 국이 너무 짜요.)'},
-  {id:33,viet:'Bao nhiêu tiền?',ko:'얼마예요?',tone:'바오 니에우 띠엔',cat:'쇼핑',example:'Cái này bao nhiêu tiền? (이것은 얼마예요?)'},
-  {id:34,viet:'Đắt quá',ko:'너무 비싸요',tone:'닷 꽈',cat:'쇼핑',example:'Đắt quá! Giảm giá được không? (너무 비싸요! 깎아줄 수 있어요?)'},
-  {id:35,viet:'Rẻ hơn',ko:'더 싸게',tone:'제 헌',cat:'쇼핑',example:'Cho tôi rẻ hơn một chút. (조금 더 싸게 해주세요.)'},
-  {id:36,viet:'Chợ',ko:'시장',tone:'쩌',cat:'쇼핑',example:'Chợ Bến Thành rất lớn. (벤탄 시장은 매우 커요.)'},
-  {id:37,viet:'Mua',ko:'사다',tone:'무아',cat:'쇼핑',example:'Tôi muốn mua cái này. (이것을 사고 싶어요.)'},
-  {id:38,viet:'Bán',ko:'팔다',tone:'반',cat:'쇼핑',example:'Bạn có bán không? (파시나요?)'},
-  {id:39,viet:'Xe máy',ko:'오토바이',tone:'쎄 마이',cat:'교통',example:'Tôi đi làm bằng xe máy. (오토바이로 출근해요.)'},
-  {id:40,viet:'Taxi',ko:'택시',tone:'딱씨',cat:'교통',example:'Gọi taxi cho tôi. (택시 불러주세요.)'},
-  {id:41,viet:'Sân bay',ko:'공항',tone:'선 바이',cat:'교통',example:'Sân bay Nội Bài. (노이바이 공항.)'},
-  {id:42,viet:'Đường',ko:'길/도로',tone:'드엉',cat:'교통',example:'Đường này đi đâu? (이 길은 어디로 가요?)'},
-  {id:43,viet:'Rẽ trái',ko:'왼쪽으로 돌다',tone:'제 짜이',cat:'교통',example:'Rẽ trái ở ngã tư. (사거리에서 좌회전하세요.)'},
-  {id:44,viet:'Rẽ phải',ko:'오른쪽으로 돌다',tone:'제 파이',cat:'교통',example:'Rẽ phải sau đó đi thẳng. (오른쪽으로 돌고 직진하세요.)'},
-  {id:45,viet:'Nhà',ko:'집',tone:'냐',cat:'일상',example:'Nhà tôi ở Hà Nội. (우리 집은 하노이에 있어요.)'},
-  {id:46,viet:'Làm việc',ko:'일하다',tone:'람 비엑',cat:'일상',example:'Tôi làm việc từ 8 giờ. (8시부터 일해요.)'},
-  {id:47,viet:'Học',ko:'공부하다',tone:'혹',cat:'일상',example:'Tôi đang học tiếng Việt. (베트남어 공부 중이에요.)'},
-  {id:48,viet:'Ngủ',ko:'자다',tone:'응우',cat:'일상',example:'Tôi muốn ngủ. (자고 싶어요.)'},
-  {id:49,viet:'Yêu',ko:'사랑하다',tone:'이에우',cat:'일상',example:'Tôi yêu bạn. (사랑해요.)'},
-  {id:50,viet:'Vui',ko:'기쁘다/즐겁다',tone:'부이',cat:'일상',example:'Tôi rất vui! (정말 기뻐요!)'},
-  {id:51,viet:'Đẹp',ko:'예쁘다/아름답다',tone:'댑',cat:'일상',example:'Bạn rất đẹp! (정말 예뻐요!)'},
-  {id:52,viet:'Mệt',ko:'피곤하다',tone:'멧',cat:'일상',example:'Tôi mệt lắm. (정말 피곤해요.)'},
-  {id:53,viet:'Buồn',ko:'슬프다',tone:'부온',cat:'일상',example:'Tôi rất buồn hôm nay. (오늘 많이 슬퍼요.)'},
-  {id:54,viet:'Khỏe',ko:'건강하다',tone:'쾌',cat:'일상',example:'Tôi rất khỏe. (저는 매우 건강해요.)'},
-  {id:55,viet:'Khách sạn',ko:'호텔',tone:'칵 산',cat:'여행',example:'Khách sạn ở đâu? (호텔이 어디예요?)'},
-  {id:56,viet:'Biển',ko:'바다',tone:'비엔',cat:'여행',example:'Đà Nẵng có biển đẹp. (다낭은 바다가 아름다워요.)'},
-  {id:57,viet:'Hà Nội',ko:'하노이',tone:'하 노이',cat:'여행',example:'Hà Nội là thủ đô Việt Nam. (하노이는 베트남 수도입니다.)'},
-  {id:58,viet:'Tôi không hiểu',ko:'이해 못 했어요',tone:'또이 콩 히에우',cat:'숙어',example:'Xin lỗi, tôi không hiểu. (죄송합니다, 이해 못 했어요.)'},
-  {id:59,viet:'Nói chậm thôi',ko:'천천히 말해주세요',tone:'노이 쩜 토이',cat:'숙어',example:'Bạn có thể nói chậm thôi không? (천천히 말해줄 수 있어요?)'},
-  {id:60,viet:'Làm ơn',ko:'제발/부탁드려요',tone:'람 언',cat:'숙어',example:'Giúp tôi với, làm ơn. (부탁드려요, 도와주세요.)'},
-  {id:61,viet:'Thật sự',ko:'진짜로',tone:'텃 쓰',cat:'숙어',example:'Thật sự không? (진짜예요?)'},
-  {id:62,viet:'Quá trời',ko:'엄청나게 (구어)',tone:'꽈 쩌이',cat:'숙어',example:'Ngon quá trời! (엄청 맛있다!)'},
-  {id:63,viet:'Được không?',ko:'~해도 될까요?',tone:'드억 콩',cat:'숙어',example:'Tôi vào được không? (들어가도 될까요?)'},
-  {id:64,viet:'Ở đâu?',ko:'어디에 있어요?',tone:'어 더우',cat:'숙어',example:'Nhà vệ sinh ở đâu? (화장실이 어디예요?)'},
-  {id:65,viet:'Tôi muốn',ko:'나는 ~하고 싶다',tone:'또이 무온',cat:'숙어',example:'Tôi muốn ăn phở. (쌀국수를 먹고 싶어요.)'},
+  {id:1,viet:'Xin chào',ko:'안녕하세요',tone:'씬 짜오',cat:'인사/Chào hỏi',example:'Xin chào! Rất vui được gặp bạn. (안녕하세요!)'},
+  {id:2,viet:'Cảm ơn',ko:'감사합니다',tone:'깜 언',cat:'인사/Chào hỏi',example:'Cảm ơn rất nhiều! (정말 감사합니다!)'},
+  {id:3,viet:'Xin lỗi',ko:'죄송합니다',tone:'씬 로이',cat:'인사/Chào hỏi',example:'Xin lỗi, tôi không biết. (죄송합니다.)'},
+  {id:4,viet:'Tạm biệt',ko:'안녕히 가세요',tone:'땀 비엣',cat:'인사/Chào hỏi',example:'Tạm biệt! Hẹn gặp lại!'},
+  {id:5,viet:'Vâng',ko:'네',tone:'방',cat:'인사/Chào hỏi',example:'Vâng, tôi hiểu.'},
+  {id:6,viet:'Không',ko:'아니요',tone:'콩',cat:'인사/Chào hỏi',example:'Không, cảm ơn.'},
+  {id:7,viet:'Bạn khỏe không?',ko:'잘 지내셨나요?',tone:'반 쾌 콩',cat:'인사/Chào hỏi',example:'Bạn khỏe không? - Tôi khỏe!'},
+  {id:8,viet:'Không sao',ko:'괜찮아요',tone:'콩 싸오',cat:'인사/Chào hỏi',example:'- Xin lỗi! - Không sao!'},
+  {id:9,viet:'Một',ko:'1 (일)',tone:'못',cat:'숫자/Số đếm',example:'Một cái bánh.'},
+  {id:10,viet:'Hai',ko:'2 (이)',tone:'하이',cat:'숫자/Số đếm',example:'Hai người.'},
+  {id:11,viet:'Ba',ko:'3 (삼)',tone:'바',cat:'숫자/Số đếm',example:'Ba ngày.'},
+  {id:12,viet:'Bốn',ko:'4 (사)',tone:'본',cat:'숫자/Số đếm',example:'Bốn mùa.'},
+  {id:13,viet:'Năm',ko:'5 (오)',tone:'남',cat:'숫자/Số đếm',example:'Năm trăm đồng.'},
+  {id:14,viet:'Sáu',ko:'6 (육)',tone:'싸우',cat:'숫자/Số đếm',example:'Sáu giờ sáng.'},
+  {id:15,viet:'Bảy',ko:'7 (칠)',tone:'바이',cat:'숫자/Số đếm',example:'Bảy ngày một tuần.'},
+  {id:16,viet:'Tám',ko:'8 (팔)',tone:'땀',cat:'숫자/Số đếm',example:'Tám giờ tối.'},
+  {id:17,viet:'Chín',ko:'9 (구)',tone:'찐',cat:'숫자/Số đếm',example:'Chín trăm.'},
+  {id:18,viet:'Mười',ko:'10 (십)',tone:'므어이',cat:'숫자/Số đếm',example:'Mười người.'},
+  {id:19,viet:'Trăm',ko:'100 (백)',tone:'짬',cat:'숫자/Số đếm',example:'Một trăm đồng.'},
+  {id:20,viet:'Nghìn',ko:'1000 (천)',tone:'응인',cat:'숫자/Số đếm',example:'Một nghìn đồng.'},
+  {id:21,viet:'Phở',ko:'쌀국수',tone:'퍼',cat:'음식/Ẩm thực',example:'Một tô phở bò.'},
+  {id:22,viet:'Cơm',ko:'밥',tone:'껌',cat:'음식/Ẩm thực',example:'Ăn cơm chưa?'},
+  {id:23,viet:'Nước',ko:'물',tone:'느억',cat:'음식/Ẩm thực',example:'Cho tôi một ly nước.'},
+  {id:24,viet:'Cà phê',ko:'커피',tone:'까 페',cat:'음식/Ẩm thực',example:'Cà phê sữa đá, làm ơn.'},
+  {id:25,viet:'Ngon',ko:'맛있다',tone:'응온',cat:'음식/Ẩm thực',example:'Món này ngon lắm!'},
+  {id:26,viet:'Bánh mì',ko:'바게트 빵',tone:'바잉 미',cat:'음식/Ẩm thực',example:'Bánh mì thịt rất ngon.'},
+  {id:27,viet:'Bia',ko:'맥주',tone:'비아',cat:'음식/Ẩm thực',example:'Một chai bia.'},
+  {id:28,viet:'Thịt',ko:'고기',tone:'팃',cat:'음식/Ẩm thực',example:'Thịt lợn hay thịt bò?'},
+  {id:29,viet:'Trái cây',ko:'과일',tone:'짜이 까이',cat:'음식/Ẩm thực',example:'Tôi thích trái cây.'},
+  {id:30,viet:'Cay',ko:'맵다',tone:'까이',cat:'음식/Ẩm thực',example:'Món này cay quá!'},
+  {id:31,viet:'Ngọt',ko:'달다',tone:'응옷',cat:'음식/Ẩm thực',example:'Trái cây rất ngọt.'},
+  {id:32,viet:'Mặn',ko:'짜다',tone:'만',cat:'음식/Ẩm thực',example:'Canh này mặn quá.'},
+  {id:33,viet:'Bao nhiêu tiền?',ko:'얼마예요?',tone:'바오 니에우 띠엔',cat:'쇼핑/Mua sắm',example:'Cái này bao nhiêu tiền?'},
+  {id:34,viet:'Đắt quá',ko:'너무 비싸요',tone:'닷 꽈',cat:'쇼핑/Mua sắm',example:'Đắt quá! Giảm giá được không?'},
+  {id:35,viet:'Rẻ hơn',ko:'더 싸게',tone:'제 헌',cat:'쇼핑/Mua sắm',example:'Cho tôi rẻ hơn một chút.'},
+  {id:36,viet:'Chợ',ko:'시장',tone:'쩌',cat:'쇼핑/Mua sắm',example:'Chợ Bến Thành rất lớn.'},
+  {id:37,viet:'Mua',ko:'사다',tone:'무아',cat:'쇼핑/Mua sắm',example:'Tôi muốn mua cái này.'},
+  {id:38,viet:'Bán',ko:'팔다',tone:'반',cat:'쇼핑/Mua sắm',example:'Bạn có bán không?'},
+  {id:39,viet:'Xe máy',ko:'오토바이',tone:'쎄 마이',cat:'교통/Giao thông',example:'Tôi đi làm bằng xe máy.'},
+  {id:40,viet:'Taxi',ko:'택시',tone:'딱씨',cat:'교통/Giao thông',example:'Gọi taxi cho tôi.'},
+  {id:41,viet:'Sân bay',ko:'공항',tone:'선 바이',cat:'교통/Giao thông',example:'Sân bay Nội Bài.'},
+  {id:42,viet:'Đường',ko:'길/도로',tone:'드엉',cat:'교통/Giao thông',example:'Đường này đi đâu?'},
+  {id:43,viet:'Nhà',ko:'집',tone:'냐',cat:'일상/Hàng ngày',example:'Nhà tôi ở Hà Nội.'},
+  {id:44,viet:'Làm việc',ko:'일하다',tone:'람 비엑',cat:'일상/Hàng ngày',example:'Tôi làm việc từ 8 giờ.'},
+  {id:45,viet:'Học',ko:'공부하다',tone:'혹',cat:'일상/Hàng ngày',example:'Tôi đang học tiếng Việt.'},
+  {id:46,viet:'Ngủ',ko:'자다',tone:'응우',cat:'일상/Hàng ngày',example:'Tôi muốn ngủ.'},
+  {id:47,viet:'Yêu',ko:'사랑하다',tone:'이에우',cat:'일상/Hàng ngày',example:'Tôi yêu bạn.'},
+  {id:48,viet:'Vui',ko:'기쁘다',tone:'부이',cat:'일상/Hàng ngày',example:'Tôi rất vui!'},
+  {id:49,viet:'Đẹp',ko:'예쁘다',tone:'댑',cat:'일상/Hàng ngày',example:'Bạn rất đẹp!'},
+  {id:50,viet:'Mệt',ko:'피곤하다',tone:'멧',cat:'일상/Hàng ngày',example:'Tôi mệt lắm.'},
+  {id:51,viet:'Buồn',ko:'슬프다',tone:'부온',cat:'일상/Hàng ngày',example:'Tôi rất buồn hôm nay.'},
+  {id:52,viet:'Khách sạn',ko:'호텔',tone:'칵 산',cat:'여행/Du lịch',example:'Khách sạn ở đâu?'},
+  {id:53,viet:'Biển',ko:'바다',tone:'비엔',cat:'여행/Du lịch',example:'Đà Nẵng có biển đẹp.'},
+  {id:54,viet:'Hà Nội',ko:'하노이',tone:'하 노이',cat:'여행/Du lịch',example:'Hà Nội là thủ đô Việt Nam.'},
+  {id:55,viet:'Tôi không hiểu',ko:'이해 못 했어요',tone:'또이 콩 히에우',cat:'숙어/Thành ngữ',example:'Xin lỗi, tôi không hiểu.'},
+  {id:56,viet:'Nói chậm thôi',ko:'천천히 말해주세요',tone:'노이 쩜 토이',cat:'숙어/Thành ngữ',example:'Bạn có thể nói chậm thôi không?'},
+  {id:57,viet:'Làm ơn',ko:'부탁드려요',tone:'람 언',cat:'숙어/Thành ngữ',example:'Giúp tôi với, làm ơn.'},
+  {id:58,viet:'Thật sự',ko:'진짜로',tone:'텃 쓰',cat:'숙어/Thành ngữ',example:'Thật sự không?'},
+  {id:59,viet:'Quá trời',ko:'엄청나게',tone:'꽈 쩌이',cat:'숙어/Thành ngữ',example:'Ngon quá trời!'},
+  {id:60,viet:'Được không?',ko:'~해도 될까요?',tone:'드억 콩',cat:'숙어/Thành ngữ',example:'Tôi vào được không?'},
+  {id:61,viet:'Ở đâu?',ko:'어디에 있어요?',tone:'어 더우',cat:'숙어/Thành ngữ',example:'Nhà vệ sinh ở đâu?'},
+  {id:62,viet:'Tôi muốn',ko:'~하고 싶다',tone:'또이 무온',cat:'숙어/Thành ngữ',example:'Tôi muốn ăn phở.'},
+  {id:63,viet:'Rất vui',ko:'매우 기쁘다',tone:'젓 부이',cat:'숙어/Thành ngữ',example:'Rất vui được gặp bạn!'},
+  {id:64,viet:'Cho tôi',ko:'~주세요',tone:'쩌 또이',cat:'숙어/Thành ngữ',example:'Cho tôi một ly nước.'},
+  {id:65,viet:'Tôi là',ko:'저는 ~입니다',tone:'또이 라',cat:'숙어/Thành ngữ',example:'Tôi là người Hàn Quốc.'},
 ];
 
-// ===== STATE =====
-let state = JSON.parse(localStorage.getItem('viet_state3')||'null') || {
-  xp:0,streak:0,lastStudyDate:null,studiedToday:0,totalCorrect:0,
-  studiedDates:[],cards:{},achievements:[],
-};
-let userWords = JSON.parse(localStorage.getItem('viet_words3')||'null');
-if (!userWords) { userWords = JSON.parse(JSON.stringify(DEFAULT_VOCAB)); localStorage.setItem('viet_words3',JSON.stringify(userWords)); }
+// ============================================================
+// STATE
+// ============================================================
+let appMode = null; // 'viet' or 'ko'
+let u = null;       // current UI strings
 
-const saveState = () => localStorage.setItem('viet_state3',JSON.stringify(state));
-const saveWords = () => localStorage.setItem('viet_words3',JSON.stringify(userWords));
-const getAllWords = () => userWords;
+function getStateKey(){ return 'viet_state_' + appMode; }
+function getWordsKey(){ return 'viet_words_' + appMode; }
 
-// ===== SRS =====
-const SRS_DAYS = [0,1,3,7,14,30];
+let state, userWords, maxId;
+
+function loadState(){
+  state = JSON.parse(localStorage.getItem(getStateKey())||'null') || {
+    xp:0,streak:0,lastStudyDate:null,studiedToday:0,totalCorrect:0,
+    studiedDates:[],cards:{},achievements:[]
+  };
+  userWords = JSON.parse(localStorage.getItem(getWordsKey())||'null');
+  if(!userWords){
+    userWords = JSON.parse(JSON.stringify(DEFAULT_VOCAB));
+    localStorage.setItem(getWordsKey(), JSON.stringify(userWords));
+  }
+  maxId = Math.max(0,...userWords.map(w=>w.id));
+}
+
+const saveState = ()=>localStorage.setItem(getStateKey(), JSON.stringify(state));
+const saveWords = ()=>localStorage.setItem(getWordsKey(), JSON.stringify(userWords));
+const getAllWords = ()=>userWords;
+
+// ============================================================
+// LANGUAGE SELECT
+// ============================================================
+function selectLang(mode){
+  appMode = mode;
+  u = UI[mode];
+  document.getElementById('langSelect').style.display='none';
+  document.getElementById('app').style.display='block';
+  loadState();
+  applyUI();
+  checkStreak();
+  updateHome();
+}
+
+function goBack(){
+  // 테마 초기화
+  document.documentElement.style.setProperty('--accent','#ff6b35');
+  document.documentElement.style.setProperty('--accent4','#ef476f');
+  document.documentElement.style.setProperty('--accent2','#ffd166');
+  // 탭 초기화
+  ['home','learn','words','profile'].forEach(x=>{
+    document.getElementById('screen-'+x).classList.toggle('active', x==='home');
+    document.getElementById('tab-'+x).classList.toggle('active', x==='home');
+  });
+  document.getElementById('fabAdd').style.display='none';
+  document.getElementById('fabUpload').style.display='none';
+  combo=0; currentMode='flash'; filterCat='all'; expanded=null;
+  document.getElementById('app').style.display='none';
+  document.getElementById('langSelect').style.display='flex';
+  appMode=null; u=null;
+}
+
+function applyUI(){
+  document.getElementById('appLogo').textContent = u.logo;
+  document.getElementById('dailyTitle').textContent = u.dailyTitle;
+  document.getElementById('dailyDesc').textContent = u.dailyDesc;
+  document.getElementById('reviewTitle').textContent = u.reviewTitle;
+  document.getElementById('dailyHeader').style.background = u.dailyBg;
+  document.getElementById('startBtn').textContent = u.startBtn;
+  document.getElementById('startBtn').style.background = u.dailyBg;
+  document.getElementById('addWordBtn').textContent = u.addWordBtn;
+  document.getElementById('uploadBtn').textContent = u.uploadBtn;
+  document.getElementById('lbl-total').textContent = u.lblTotal;
+  document.getElementById('lbl-learned').textContent = u.lblLearned;
+  document.getElementById('tabLbl0').textContent = u.tabLbls[0];
+  document.getElementById('tabLbl1').textContent = u.tabLbls[1];
+  document.getElementById('tabLbl2').textContent = u.tabLbls[2];
+  document.getElementById('tabLbl3').textContent = u.tabLbls[3];
+  document.getElementById('mode-flash').textContent = u.modeFlash;
+  document.getElementById('mode-quiz').textContent = u.modeQuiz;
+  document.getElementById('mode-type').textContent = u.modeType;
+  document.getElementById('searchInput').placeholder = u.searchInput;
+  document.getElementById('profileName').textContent = u.profileName;
+  document.getElementById('profileAvatarIcon').textContent = u.profileAvatar;
+  document.getElementById('profileAvatar').style.background =
+    appMode==='ko' ? 'linear-gradient(135deg,#3d91ff,#6a5af9)' : 'linear-gradient(135deg,var(--accent),var(--accent4))';
+  document.getElementById('pStreakLbl').textContent = u.pStreakLbl;
+  document.getElementById('pCorrectLbl').textContent = u.pCorrectLbl;
+  document.getElementById('calTitle').textContent = u.calTitle;
+  document.getElementById('achTitle').textContent = u.achTitle;
+  // upload modal
+  document.getElementById('uploadTitle').textContent = u.uploadTitle;
+  document.getElementById('fmtTitle').textContent = u.fmtTitle;
+  document.getElementById('fmtExample').textContent = u.fmtExample;
+  document.getElementById('fmtNote').textContent = u.fmtNote;
+  document.getElementById('dzTitle').textContent = u.dzTitle;
+  document.getElementById('dzSub').textContent = u.dzSub;
+  document.getElementById('uploadCancelBtn').textContent = u.uploadCancel;
+  // theme accent for ko mode
+  if(appMode==='ko'){
+    document.documentElement.style.setProperty('--accent','#3d91ff');
+    document.documentElement.style.setProperty('--accent4','#6a5af9');
+    document.documentElement.style.setProperty('--accent2','#a8d8ff');
+  } else {
+    document.documentElement.style.setProperty('--accent','#ff6b35');
+    document.documentElement.style.setProperty('--accent4','#ef476f');
+    document.documentElement.style.setProperty('--accent2','#ffd166');
+  }
+  updateCombo();
+}
+
+function updateCombo(){
+  const lbl = u ? u.comboLabel.replace('{n}', combo) : '';
+  document.getElementById('comboLabel').innerHTML = lbl;
+}
+
+// ============================================================
+// SRS
+// ============================================================
+const SRS_DAYS=[0,1,3,7,14,30];
 function getCard(id){ if(!state.cards[id]) state.cards[id]={level:0,nextReview:0}; return state.cards[id]; }
-function isDue(id){ const c=state.cards[id]; return !c || Date.now()>=c.nextReview; }
+function isDue(id){ const c=state.cards[id]; return !c||Date.now()>=c.nextReview; }
 function getDue(){ return getAllWords().filter(w=>isDue(w.id)); }
 function schedule(id,q){
   const c=getCard(id);
@@ -412,71 +630,95 @@ function schedule(id,q){
   saveState();
 }
 
-// ===== TTS =====
-function speak(text, lang='vi'){
+// ============================================================
+// TTS
+// ============================================================
+function speak(text, lang){
   if(!window.speechSynthesis) return;
-  const u=new SpeechSynthesisUtterance(text);
-  if(lang==='ko'){ u.lang='ko-KR'; u.rate=0.9; }
-  else { u.lang='vi-VN'; u.rate=0.85; }
-  const voices=speechSynthesis.getVoices();
-  const v=lang==='ko'
-    ? voices.find(x=>x.lang.startsWith('ko'))
-    : voices.find(x=>x.lang.startsWith('vi'));
-  if(v) u.voice=v;
+  const ut=new SpeechSynthesisUtterance(text);
+  ut.lang = lang==='ko'?'ko-KR':'vi-VN';
+  ut.rate = 0.85;
+  const v=speechSynthesis.getVoices().find(x=>x.lang.startsWith(lang==='ko'?'ko':'vi'));
+  if(v) ut.voice=v;
   speechSynthesis.cancel();
-  speechSynthesis.speak(u);
+  speechSynthesis.speak(ut);
 }
 
-// ===== WORD MANAGEMENT =====
+function speakMain(text){ speak(text, u.mainLang); }
+function speakSub(text){ speak(text, u.subLang); }
+
+// ============================================================
+// WORD MANAGEMENT
+// ============================================================
 let editingId=null;
-let maxId=Math.max(0,...DEFAULT_VOCAB.map(w=>w.id));
 
 function openModal(id=null){
   editingId=id;
-  document.getElementById('modalTitle').textContent=id?'✏️ 단어 수정':'➕ 단어 추가';
+  document.getElementById('modalTitle').textContent = id?u.modalEditTitle:u.modalAddTitle;
+  document.getElementById('fl1').textContent = u.fl1;
+  document.getElementById('fl2').textContent = u.fl2;
+  document.getElementById('fl3').textContent = u.fl3;
+  document.getElementById('fl4').textContent = u.fl4;
+  document.getElementById('fl5').textContent = u.fl5;
+  document.getElementById('fMain').placeholder = u.fMainPH;
+  document.getElementById('fSub').placeholder = u.fSubPH;
+  document.getElementById('fTone').placeholder = u.fTonePH;
+  document.getElementById('fCat').placeholder = u.fCatPH;
+  document.getElementById('fEx').placeholder = u.fExPH;
+  document.getElementById('modalSaveBtn').textContent = u.modalSave;
+  document.getElementById('modalCancelBtn').textContent = u.modalCancel;
+  document.getElementById('modalSaveBtn').style.background = u.dailyBg;
   if(id){
     const w=userWords.find(x=>x.id===id);
-    document.getElementById('fViet').value=w.viet;
-    document.getElementById('fTone').value=w.tone||'';
-    document.getElementById('fKo').value=w.ko;
-    document.getElementById('fCat').value=w.cat||'';
-    document.getElementById('fEx').value=w.example||'';
+    document.getElementById('fMain').value = w[u.mainField]||'';
+    document.getElementById('fSub').value = w[u.subField]||'';
+    document.getElementById('fTone').value = w[u.toneField]||'';
+    document.getElementById('fCat').value = w.cat||'';
+    document.getElementById('fEx').value = w.example||'';
   } else {
-    ['fViet','fTone','fKo','fCat','fEx'].forEach(id=>document.getElementById(id).value='');
+    ['fMain','fSub','fTone','fCat','fEx'].forEach(x=>document.getElementById(x).value='');
   }
   document.getElementById('modalOverlay').classList.add('open');
-  setTimeout(()=>document.getElementById('fViet').focus(),400);
+  setTimeout(()=>document.getElementById('fMain').focus(),400);
 }
 
 function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); }
 function closeModalBg(e){ if(e.target===document.getElementById('modalOverlay')) closeModal(); }
 
 function saveWord(){
-  const viet=document.getElementById('fViet').value.trim();
-  const ko=document.getElementById('fKo').value.trim();
-  if(!viet||!ko){ showToast('⚠️ 베트남어와 뜻은 필수입니다'); return; }
-  const cat=document.getElementById('fCat').value.trim()||'기타';
+  const main=document.getElementById('fMain').value.trim();
+  const sub=document.getElementById('fSub').value.trim();
+  if(!main||!sub){ showToast('⚠️ ' + u.fl1 + ', ' + u.fl2); return; }
+  const cat=document.getElementById('fCat').value.trim()||'기타/Khác';
+  const obj={};
+  obj[u.mainField]=main; obj[u.subField]=sub;
+  obj[u.toneField]=document.getElementById('fTone').value.trim();
+  obj.cat=cat; obj.example=document.getElementById('fEx').value.trim();
+  // ensure both fields exist
+  if(!obj.viet) obj.viet=main; if(!obj.ko) obj.ko=sub;
   if(editingId){
     const idx=userWords.findIndex(w=>w.id===editingId);
-    if(idx>=0) userWords[idx]={...userWords[idx],viet,ko,tone:document.getElementById('fTone').value.trim(),cat,example:document.getElementById('fEx').value.trim()};
-    showToast('✅ 단어가 수정됐습니다!');
+    if(idx>=0) userWords[idx]={...userWords[idx],...obj};
+    showToast('✅ OK!');
   } else {
     maxId++;
-    userWords.push({id:maxId,viet,ko,tone:document.getElementById('fTone').value.trim(),cat,example:document.getElementById('fEx').value.trim()});
-    showToast('✅ 새 단어가 추가됐습니다! 🎉');
+    userWords.push({id:maxId,...obj});
+    showToast('✅ ' + (appMode==='viet'?'새 단어 추가됐습니다!':'Đã thêm từ mới!'));
   }
-  saveWords(); closeModal(); renderWordList(); updateHome();
-  checkAchievements();
+  saveWords(); closeModal(); renderWordList(); updateHome(); checkAchievements();
 }
 
 function deleteWord(id){
-  if(!confirm('이 단어를 삭제할까요?')) return;
+  const msg = appMode==='viet'?'이 단어를 삭제할까요?':'Xóa từ này?';
+  if(!confirm(msg)) return;
   userWords=userWords.filter(w=>w.id!==id);
   delete state.cards[id];
   saveWords(); saveState(); renderWordList(); updateHome();
 }
 
-// ===== STREAK =====
+// ============================================================
+// STREAK
+// ============================================================
 function checkStreak(){
   const today=new Date().toDateString();
   if(state.lastStudyDate!==today){
@@ -489,7 +731,10 @@ function checkStreak(){
   document.getElementById('streakNum').textContent=state.streak;
 }
 
-function addXP(n){ state.xp+=n; saveState(); document.getElementById('xpBar').style.width=((state.xp%500)/500*100)+'%'; }
+function addXP(n){
+  state.xp+=n; saveState();
+  document.getElementById('xpBar').style.width=((state.xp%500)/500*100)+'%';
+}
 
 function showToast(msg){
   const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
@@ -504,43 +749,40 @@ function showXPPop(msg){
   setTimeout(()=>el.remove(),900);
 }
 
-// ===== TABS =====
+// ============================================================
+// TABS
+// ============================================================
 function switchTab(t){
   ['home','learn','words','profile'].forEach(x=>{
     document.getElementById('screen-'+x).classList.toggle('active',x===t);
     document.getElementById('tab-'+x).classList.toggle('active',x===t);
   });
   const showFab=(t==='words'||t==='home');
-  document.getElementById('fabBtn').style.display=showFab?'flex':'none';
-  document.getElementById('fabUploadBtn').style.display=showFab?'flex':'none';
+  document.getElementById('fabAdd').style.display=showFab?'flex':'none';
+  document.getElementById('fabUpload').style.display=showFab?'flex':'none';
   if(t==='home') updateHome();
   if(t==='learn') startLearn();
   if(t==='words') renderWordList();
   if(t==='profile') renderProfile();
 }
 
-// ===== HOME =====
+// ============================================================
+// HOME
+// ============================================================
 function updateHome(){
   document.getElementById('statTotal').textContent=getAllWords().length;
-  document.getElementById('statLearned').textContent=getAllWords().filter(w=>(state.cards[w.id+'_vk']?.level||0)>=2).length;
+  document.getElementById('statLearned').textContent=getAllWords().filter(w=>(state.cards[w.id]?.level||0)>=2).length;
   document.getElementById('statXP').textContent=state.xp;
-  const dueVK=getAllWords().filter(w=>{ const c=state.cards[w.id+'_vk']; return !c||Date.now()>=c.nextReview; }).length;
-  const dueKV=getAllWords().filter(w=>{ const c=state.cards[w.id+'_kv']; return !c||Date.now()>=c.nextReview; }).length;
-  document.getElementById('reviewCount').textContent=`🇻🇳→🇰🇷 ${dueVK}개 · 🇰🇷→🇻🇳 ${dueKV}개 복습 대기`;
+  document.getElementById('reviewCount').textContent=getDue().length+(appMode==='viet'?'개 단어 복습이 필요합니다':' từ cần ôn tập');
   document.getElementById('dailyProgress').style.width=Math.min(100,(state.studiedToday/20)*100)+'%';
   document.getElementById('dailyCount').textContent=state.studiedToday+'/20';
+  document.getElementById('streakNum').textContent=state.streak;
 }
 
-// ===== LEARN =====
+// ============================================================
+// LEARN
+// ============================================================
 let currentMode='flash', queue=[], qIdx=0, combo=0;
-let learnDir='vk'; // 'vk'=베트남→한국, 'kv'=한국→베트남
-
-function setDir(d){
-  learnDir=d;
-  document.getElementById('dir-vk').className='dir-btn'+(d==='vk'?' active':'');
-  document.getElementById('dir-kv').className='dir-btn'+(d==='kv'?' active active-ko':'');
-  startLearn();
-}
 
 function setMode(m){
   currentMode=m;
@@ -552,11 +794,11 @@ function setMode(m){
 function startLearn(){
   const all=getAllWords();
   if(all.length===0){
-    document.getElementById('gameArea').innerHTML='<div class="empty-state"><div class="big">📭</div><p>단어가 없습니다.<br>단어장 탭에서 추가해보세요!</p></div>';
+    document.getElementById('gameArea').innerHTML='<div class="empty-state"><div class="big">📭</div><p>'+(appMode==='viet'?'단어가 없습니다.':'Chưa có từ nào.')+'</p></div>';
     return;
   }
-  const due=all.filter(w=>isDueD(w.id));
-  const fresh=all.filter(w=>!state.cards[w.id+'_'+learnDir]||state.cards[w.id+'_'+learnDir].level===0);
+  const due=getDue();
+  const fresh=all.filter(w=>!state.cards[w.id]||state.cards[w.id].level===0);
   queue=[...shuffle(due),...shuffle(fresh).slice(0,10)];
   if(queue.length===0) queue=shuffle(all);
   qIdx=0; renderCard();
@@ -564,148 +806,82 @@ function startLearn(){
 
 function shuffle(a){ return [...a].sort(()=>Math.random()-.5); }
 
-function isDueD(id){ const k=id+'_'+learnDir; const c=state.cards[k]; return !c||Date.now()>=c.nextReview; }
-function getCardD(id){ const k=id+'_'+learnDir; if(!state.cards[k]) state.cards[k]={level:0,nextReview:0}; return state.cards[k]; }
-function scheduleD(id,q){
-  const c=getCardD(id);
-  if(q<1) c.level=0;
-  else if(q===1) c.level=Math.max(0,c.level-1);
-  else c.level=Math.min(SRS_DAYS.length-1,c.level+1);
-  c.nextReview=Date.now()+SRS_DAYS[c.level]*86400000;
-  saveState();
-}
-
 function renderCard(){
   if(queue.length===0){ startLearn(); return; }
   const w=queue[qIdx%queue.length];
-  document.getElementById('comboNum').textContent=combo;
-  if(learnDir==='vk'){
-    if(currentMode==='flash') renderFlash(w);
-    else if(currentMode==='quiz') renderQuiz(w);
-    else renderType(w);
-  } else {
-    if(currentMode==='flash') renderFlashKV(w);
-    else if(currentMode==='quiz') renderQuizKV(w);
-    else renderTypeKV(w);
-  }
+  updateCombo();
+  if(currentMode==='flash') renderFlash(w);
+  else if(currentMode==='quiz') renderQuiz(w);
+  else renderType(w);
 }
 
 function esc(s){ return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
 
-// ─── 베트남→한국 ───
+// main = 공부할 언어 (베트남어 or 한국어), sub = 모국어 뜻
+function getMain(w){ return w[u.mainField]||''; }
+function getSub(w){ return w[u.subField]||''; }
+
 function renderFlash(w){
+  const main=getMain(w), sub=getSub(w);
+  const mainFont=appMode==='viet'?'font-family:"Be Vietnam Pro",sans-serif':'font-size:36px';
   document.getElementById('gameArea').innerHTML=`
     <div class="flashcard" id="fc">
       <div class="card-category">${w.cat||'기타'}</div>
-      <div class="card-viet">${w.viet}</div>
-      <div class="card-tone">[${w.tone||''}]</div>
-      <button class="sound-btn" onclick="speak('${esc(w.viet)}','vi')">🔊 베트남어</button>
-      <div class="card-hint">탭해서 한국어 뜻 보기 👆</div>
+      <div class="card-main" style="${mainFont}">${main}</div>
+      ${w.tone?`<div class="card-sub">[${w.tone}]</div>`:''}
+      <button class="sound-btn sound-${u.mainLang==='vi'?'viet':'ko'}" onclick="speakMain('${esc(main)}')">${u.soundMain}</button>
+      <div class="card-hint">${u.cardHintFlash}</div>
       <div id="ans" style="display:none">
         <div class="answer-section">
-          <div class="answer-korean">${w.ko}</div>
-          <button class="ko-sound-btn" onclick="speak('${esc(w.ko)}','ko');event.stopPropagation()">🔊 한국어</button>
+          <div class="${appMode==='viet'?'answer-main':'answer-viet'}">${sub}</div>
+          <button class="sound-btn sound-${u.subLang==='vi'?'viet':'ko'}" onclick="speakSub('${esc(sub)}');event.stopPropagation()">${u.soundAnswer}</button>
           ${w.example?`<div class="answer-example">${w.example}</div>`:''}
         </div>
         <div class="flip-actions">
-          <button class="flip-btn btn-again" onclick="rate(0)">😵 모름</button>
-          <button class="flip-btn btn-hard" onclick="rate(1)">😅 어려움</button>
-          <button class="flip-btn btn-good" onclick="rate(2)">😊 알았음!</button>
+          <button class="flip-btn btn-again" onclick="rate(0)">${u.btnAgain}</button>
+          <button class="flip-btn btn-hard" onclick="rate(1)">${u.btnHard}</button>
+          <button class="flip-btn btn-good" onclick="rate(2)">${u.btnGood}</button>
         </div>
       </div>
     </div>`;
   document.getElementById('fc').addEventListener('click',e=>{
     if(e.target.tagName==='BUTTON') return;
     const a=document.getElementById('ans');
-    if(a.style.display==='none'){ a.style.display='block'; speak(w.viet,'vi'); }
+    if(a.style.display==='none'){ a.style.display='block'; speakMain(main); }
   });
 }
 
 function renderQuiz(w){
+  const main=getMain(w);
   const opts=shuffle([w,...shuffle(getAllWords().filter(x=>x.id!==w.id)).slice(0,3)]);
+  const mainFont=appMode==='viet'?'font-family:"Be Vietnam Pro",sans-serif':'font-size:36px';
+  const optFont=appMode==='ko'?'font-family:"Be Vietnam Pro",sans-serif;font-size:16px':'';
   document.getElementById('gameArea').innerHTML=`
     <div class="flashcard">
       <div class="card-category">${w.cat||'기타'}</div>
-      <div class="card-viet">${w.viet}</div>
-      <div class="card-tone">[${w.tone||''}]</div>
-      <button class="sound-btn" onclick="speak('${esc(w.viet)}','vi')">🔊 베트남어</button>
-      <div class="card-hint">한국어 뜻을 고르세요</div>
+      <div class="card-main" style="${mainFont}">${main}</div>
+      ${w.tone?`<div class="card-sub">[${w.tone}]</div>`:''}
+      <button class="sound-btn sound-${u.mainLang==='vi'?'viet':'ko'}" onclick="speakMain('${esc(main)}')">${u.soundMain}</button>
+      <div class="card-hint">${u.cardHintQuiz}</div>
     </div>
     <div class="quiz-options">
-      ${opts.map(o=>`<button class="quiz-opt" onclick="checkQ(${o.id===w.id},this,${w.id})">${o.ko}</button>`).join('')}
+      ${opts.map(o=>`<button class="quiz-opt" style="${optFont}" onclick="checkQ(${o.id===w.id},this,${w.id})">${getSub(o)}</button>`).join('')}
     </div>`;
 }
 
 function renderType(w){
+  const main=getMain(w), sub=getSub(w);
+  const mainFont=appMode==='viet'?'font-family:"Be Vietnam Pro",sans-serif':'font-size:36px';
   document.getElementById('gameArea').innerHTML=`
     <div class="flashcard">
       <div class="card-category">${w.cat||'기타'}</div>
-      <div style="font-size:18px;color:var(--muted);margin-bottom:12px">뜻: <strong style="color:var(--accent2)">${w.ko}</strong></div>
-      <button class="sound-btn" onclick="speak('${esc(w.viet)}','vi')">🔊 힌트 듣기</button>
+      <div style="font-size:16px;color:var(--muted);margin-bottom:10px">${appMode==='viet'?'뜻':'Nghĩa'}: <strong style="color:var(--accent2);font-size:18px">${sub}</strong></div>
+      <button class="sound-btn sound-${u.subLang==='vi'?'viet':'ko'}" onclick="speakSub('${esc(sub)}')">${u.soundAnswer} 힌트</button>
+      <div class="card-hint">${u.cardHintType}</div>
     </div>
-    <input class="type-input" id="ti" placeholder="베트남어 입력..." autocomplete="off" autocorrect="off" spellcheck="false">
-    <button class="submit-btn" id="sb" onclick="checkT('${esc(w.viet)}',${w.id})">확인 ✓</button>`;
-  document.getElementById('ti').addEventListener('keydown',e=>{ if(e.key==='Enter') checkT(w.viet,w.id); });
-  setTimeout(()=>document.getElementById('ti').focus(),300);
-}
-
-// ─── 한국→베트남 ───
-function renderFlashKV(w){
-  document.getElementById('gameArea').innerHTML=`
-    <div class="flashcard" id="fc" style="border-top-color:transparent">
-      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#3d91ff,#6a5af9)"></div>
-      <div class="card-category">${w.cat||'기타'}</div>
-      <div class="card-ko-main">${w.ko}</div>
-      <button class="ko-sound-btn" onclick="speak('${esc(w.ko)}','ko')">🔊 한국어</button>
-      <div class="card-hint">탭해서 베트남어 보기 👆</div>
-      <div id="ans" style="display:none">
-        <div class="answer-section">
-          <div class="card-viet-answer">${w.viet}</div>
-          ${w.tone?`<div class="card-tone">[${w.tone}]</div>`:''}
-          <button class="sound-btn" onclick="speak('${esc(w.viet)}','vi');event.stopPropagation()">🔊 베트남어</button>
-          ${w.example?`<div class="answer-example">${w.example}</div>`:''}
-        </div>
-        <div class="flip-actions">
-          <button class="flip-btn btn-again" onclick="rate(0)">😵 모름</button>
-          <button class="flip-btn btn-hard" onclick="rate(1)">😅 어려움</button>
-          <button class="flip-btn btn-good" onclick="rate(2)">😊 알았음!</button>
-        </div>
-      </div>
-    </div>`;
-  document.getElementById('fc').addEventListener('click',e=>{
-    if(e.target.tagName==='BUTTON') return;
-    const a=document.getElementById('ans');
-    if(a.style.display==='none'){ a.style.display='block'; speak(w.viet,'vi'); }
-  });
-}
-
-function renderQuizKV(w){
-  const opts=shuffle([w,...shuffle(getAllWords().filter(x=>x.id!==w.id)).slice(0,3)]);
-  document.getElementById('gameArea').innerHTML=`
-    <div class="flashcard">
-      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#3d91ff,#6a5af9)"></div>
-      <div class="card-category">${w.cat||'기타'}</div>
-      <div class="card-ko-main">${w.ko}</div>
-      <button class="ko-sound-btn" onclick="speak('${esc(w.ko)}','ko')">🔊 한국어</button>
-      <div class="card-hint">베트남어를 고르세요</div>
-    </div>
-    <div class="quiz-options">
-      ${opts.map(o=>`<button class="quiz-opt" style="font-family:'Be Vietnam Pro',sans-serif;font-size:16px" onclick="checkQ(${o.id===w.id},this,${w.id})">${o.viet}</button>`).join('')}
-    </div>`;
-}
-
-function renderTypeKV(w){
-  document.getElementById('gameArea').innerHTML=`
-    <div class="flashcard">
-      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#3d91ff,#6a5af9)"></div>
-      <div class="card-category">${w.cat||'기타'}</div>
-      <div class="card-ko-main">${w.ko}</div>
-      <button class="ko-sound-btn" onclick="speak('${esc(w.ko)}','ko')">🔊 한국어</button>
-      <div class="card-hint" style="margin-top:8px">베트남어로 입력하세요</div>
-    </div>
-    <input class="type-input" id="ti" placeholder="베트남어 입력..." autocomplete="off" autocorrect="off" spellcheck="false" style="font-family:'Be Vietnam Pro',sans-serif">
-    <button class="submit-btn" id="sb" style="background:linear-gradient(135deg,#3d91ff,#6a5af9)" onclick="checkT('${esc(w.viet)}',${w.id})">확인 ✓</button>`;
-  document.getElementById('ti').addEventListener('keydown',e=>{ if(e.key==='Enter') checkT(w.viet,w.id); });
+    <input class="type-input" id="ti" placeholder="${u.typeInput}" autocomplete="off" autocorrect="off" spellcheck="false" style="${mainFont}">
+    <button class="submit-btn" id="sb" style="background:${u.dailyBg}" onclick="checkT('${esc(main)}',${w.id})">${u.confirm}</button>`;
+  document.getElementById('ti').addEventListener('keydown',e=>{ if(e.key==='Enter') checkT(main,w.id); });
   setTimeout(()=>document.getElementById('ti').focus(),300);
 }
 
@@ -713,49 +889,47 @@ function checkQ(ok,btn,wid){
   document.querySelectorAll('.quiz-opt').forEach(b=>b.onclick=null);
   if(ok){
     btn.classList.add('correct'); combo++;
-    scheduleD(wid,2); addXP(10);
+    schedule(wid,2); addXP(10);
     state.studiedToday++; state.totalCorrect++;
-    showXPPop(combo>=5?'+20 XP 🔥COMBO!':'+10 XP ✨');
+    showXPPop(combo>=5?'+20 XP 🔥':'+10 XP ✨');
   } else {
     btn.classList.add('wrong'); combo=0;
     document.querySelectorAll('.quiz-opt').forEach(b=>{ if(b!==btn) b.classList.add('reveal'); });
-    scheduleD(wid,0);
+    schedule(wid,0);
   }
-  document.getElementById('comboNum').textContent=combo;
-  saveState(); checkAchievements();
+  updateCombo(); saveState(); checkAchievements();
   setTimeout(()=>{ qIdx++; renderCard(); },1200);
 }
 
 function checkT(ans,wid){
   const inp=document.getElementById('ti');
-  const val=inp.value.trim();
-  const ok=val.toLowerCase()===ans.toLowerCase();
+  const ok=inp.value.trim().toLowerCase()===ans.toLowerCase();
   if(ok){
     inp.classList.add('correct'); combo++;
-    scheduleD(wid,2); addXP(15);
+    schedule(wid,2); addXP(15);
     state.studiedToday++; state.totalCorrect++;
     showXPPop('+15 XP ✨');
   } else {
-    inp.classList.add('wrong'); inp.value=ans; combo=0; scheduleD(wid,0);
+    inp.classList.add('wrong'); inp.value=ans; combo=0; schedule(wid,0);
   }
   document.getElementById('sb').disabled=true;
-  document.getElementById('comboNum').textContent=combo;
-  saveState(); checkAchievements();
+  updateCombo(); saveState(); checkAchievements();
   setTimeout(()=>{ qIdx++; renderCard(); },1500);
 }
 
 function rate(q){
   const w=queue[qIdx%queue.length];
-  scheduleD(w.id,q);
+  schedule(w.id,q);
   const xp=[0,5,10][q]||0; addXP(xp);
   if(q>=2){ state.studiedToday++; state.totalCorrect++; combo++; showXPPop('+'+xp+' XP'); }
   else combo=0;
-  document.getElementById('comboNum').textContent=combo;
-  saveState(); checkAchievements();
+  updateCombo(); saveState(); checkAchievements();
   setTimeout(()=>{ qIdx++; renderCard(); },200);
 }
 
-// ===== WORD LIST =====
+// ============================================================
+// WORD LIST
+// ============================================================
 let filterCat='all', expanded=null;
 
 function renderWordList(){
@@ -763,15 +937,16 @@ function renderWordList(){
   const cats=['all',...new Set(all.map(w=>w.cat||'기타'))];
   const q=(document.getElementById('searchInput')?.value||'').toLowerCase();
   document.getElementById('filterCats').innerHTML=cats.map(c=>
-    `<button class="cat-pill ${filterCat===c?'active':''}" onclick="setFCat('${c}')">${c==='all'?'전체':c}</button>`
+    `<button class="cat-pill ${filterCat===c?'active':''}" onclick="setFCat('${c}')">${c==='all'?(appMode==='viet'?'전체':'Tất cả'):c}</button>`
   ).join('');
   let list=all;
   if(filterCat!=='all') list=list.filter(w=>(w.cat||'기타')===filterCat);
-  if(q) list=list.filter(w=>w.viet.toLowerCase().includes(q)||w.ko.includes(q));
+  if(q) list=list.filter(w=>getMain(w).toLowerCase().includes(q)||getSub(w).toLowerCase().includes(q));
   if(!list.length){
-    document.getElementById('wordList').innerHTML='<div class="empty-state"><div class="big">🔍</div><p>단어가 없습니다.<br>+ 버튼으로 추가해보세요!</p></div>';
+    document.getElementById('wordList').innerHTML='<div class="empty-state"><div class="big">🔍</div><p>'+(appMode==='viet'?'단어가 없습니다.':'Không tìm thấy từ nào.')+'</p></div>';
     return;
   }
+  const mainFont=appMode==='viet'?'font-family:"Be Vietnam Pro",sans-serif':'font-size:18px';
   document.getElementById('wordList').innerHTML=list.map(w=>{
     const lv=state.cards[w.id]?.level||0;
     const dots=Array.from({length:5},(_,i)=>`<div class="level-dot ${i<lv?'filled':''}"></div>`).join('');
@@ -779,8 +954,8 @@ function renderWordList(){
     return `<div class="word-item" onclick="toggleEx(${w.id},event)">
       <div style="display:flex;align-items:center;justify-content:space-between">
         <div>
-          <div class="word-viet">${w.viet} 🔊</div>
-          <div class="word-ko">${w.ko}</div>
+          <div class="word-main" style="${mainFont}">${getMain(w)} 🔊</div>
+          <div class="word-sub">${getSub(w)}</div>
           ${w.tone?`<div style="font-size:11px;color:var(--muted);margin-top:2px">[${w.tone}]</div>`:''}
         </div>
         <div class="word-level">${dots}</div>
@@ -788,9 +963,9 @@ function renderWordList(){
       ${isEx?`<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
         ${w.example?`<div style="font-size:13px;color:var(--muted);margin-bottom:10px;font-family:'Be Vietnam Pro',sans-serif">${w.example}</div>`:''}
         <div class="word-actions">
-          <button class="w-btn w-btn-sound" onclick="speak('${esc(w.viet)}');event.stopPropagation()">🔊 발음</button>
-          <button class="w-btn w-btn-edit" onclick="openModal(${w.id});event.stopPropagation()">✏️ 수정</button>
-          <button class="w-btn w-btn-del" onclick="deleteWord(${w.id});event.stopPropagation()">🗑️ 삭제</button>
+          <button class="w-btn w-btn-sound" onclick="speakMain('${esc(getMain(w))}');event.stopPropagation()">🔊</button>
+          <button class="w-btn w-btn-edit" onclick="openModal(${w.id});event.stopPropagation()">${appMode==='viet'?'✏️ 수정':'✏️ Sửa'}</button>
+          <button class="w-btn w-btn-del" onclick="deleteWord(${w.id});event.stopPropagation()">${appMode==='viet'?'🗑️ 삭제':'🗑️ Xóa'}</button>
         </div>
       </div>`:''}
     </div>`;
@@ -799,50 +974,51 @@ function renderWordList(){
 
 function toggleEx(id,e){
   if(e.target.tagName==='BUTTON') return;
-  const w=userWords.find(x=>x.id===id);
   expanded=expanded===id?null:id;
-  if(expanded===id&&w) speak(w.viet);
+  if(expanded===id){ const w=userWords.find(x=>x.id===id); if(w) speakMain(getMain(w)); }
   renderWordList();
 }
 
 function setFCat(c){ filterCat=c; renderWordList(); }
 
-// ===== ACHIEVEMENTS =====
-const ACHIEVEMENTS=[
-  {id:'first',icon:'🎉',title:'첫 시작!',desc:'첫 번째 단어를 공부했습니다',check:()=>state.totalCorrect>=1},
-  {id:'streak3',icon:'🔥',title:'3일 연속!',desc:'3일 연속 공부했습니다',check:()=>state.streak>=3},
-  {id:'streak7',icon:'⚡',title:'일주일 연속!',desc:'7일 연속 공부했습니다',check:()=>state.streak>=7},
-  {id:'words10',icon:'📚',title:'10개 달성!',desc:'10개 답을 맞혔습니다',check:()=>state.totalCorrect>=10},
-  {id:'words50',icon:'🏆',title:'50개 달성!',desc:'50개 답을 맞혔습니다',check:()=>state.totalCorrect>=50},
-  {id:'combo5',icon:'💥',title:'콤보 마스터!',desc:'5연속 정답!',check:()=>combo>=5},
-  {id:'xp100',icon:'⭐',title:'XP 100!',desc:'100 XP를 획득했습니다',check:()=>state.xp>=100},
-  {id:'added',icon:'✍️',title:'나만의 단어!',desc:'직접 단어를 추가했습니다',check:()=>userWords.length>DEFAULT_VOCAB.length},
-];
-
+// ============================================================
+// ACHIEVEMENTS
+// ============================================================
 function checkAchievements(){
-  ACHIEVEMENTS.forEach(a=>{
-    if(!state.achievements.includes(a.id)&&a.check()){
+  if(!u) return;
+  const checks={
+    first:()=>state.totalCorrect>=1,
+    streak3:()=>state.streak>=3,
+    streak7:()=>state.streak>=7,
+    words10:()=>state.totalCorrect>=10,
+    words50:()=>state.totalCorrect>=50,
+    combo5:()=>combo>=5,
+    xp100:()=>state.xp>=100,
+    added:()=>userWords.length>DEFAULT_VOCAB.length,
+  };
+  u.achievements.forEach(a=>{
+    if(!state.achievements.includes(a.id)&&checks[a.id]&&checks[a.id]()){
       state.achievements.push(a.id); saveState();
-      showToast(a.icon+' '+a.title+' 달성!');
+      showToast(a.icon+' '+a.title);
     }
   });
 }
 
-// ===== PROFILE =====
+// ============================================================
+// PROFILE
+// ============================================================
 function renderProfile(){
   document.getElementById('pStreak').textContent=state.streak;
   document.getElementById('pCorrect').textContent=state.totalCorrect;
   document.getElementById('pXP').textContent=state.xp;
   const lv=Math.floor(state.xp/500)+1;
-  const names=['초보자','입문자','학습자','중급자','상급자','전문가'];
-  document.getElementById('levelBadge').textContent='LV.'+lv+' '+(names[Math.min(lv-1,5)]||'마스터');
+  document.getElementById('levelBadge').textContent='LV.'+lv+' '+(u.levelNames[Math.min(lv-1,5)]||u.levelNames[5]);
   const today=new Date();
   document.getElementById('calendarGrid').innerHTML=Array.from({length:21},(_,i)=>{
     const d=new Date(today-(20-i)*86400000);
-    const ds=d.toDateString();
-    return `<div class="cal-day ${state.studiedDates.includes(ds)?'done':''} ${i===20?'today':''}">${d.getDate()}</div>`;
+    return `<div class="cal-day ${state.studiedDates.includes(d.toDateString())?'done':''} ${i===20?'today':''}">${d.getDate()}</div>`;
   }).join('');
-  document.getElementById('achievementList').innerHTML=ACHIEVEMENTS.map(a=>{
+  document.getElementById('achievementList').innerHTML=u.achievements.map(a=>{
     const ul=state.achievements.includes(a.id);
     return `<div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;opacity:${ul?1:.4}">
       <span style="font-size:32px">${a.icon}</span>
@@ -852,8 +1028,10 @@ function renderProfile(){
   }).join('');
 }
 
-// ===== TXT UPLOAD =====
-let parsedWords = [];
+// ============================================================
+// TXT UPLOAD
+// ============================================================
+let parsedWords=[];
 
 function openUpload(){
   parsedWords=[];
@@ -862,130 +1040,75 @@ function openUpload(){
   document.getElementById('errorSummary').style.display='none';
   document.getElementById('previewList').innerHTML='';
   document.getElementById('fileInput').value='';
-  // Reset drop zone text
-  document.querySelector('.dz-title').textContent='TXT 파일을 선택하세요';
-  document.querySelector('.dz-sub').textContent='탭해서 파일 선택\n또는 여기로 파일을 끌어다 놓으세요';
+  document.getElementById('dzTitle').textContent=u.dzTitle;
+  document.getElementById('dzSub').textContent=u.dzSub;
   document.getElementById('uploadOverlay').classList.add('open');
 }
+function closeUpload(){ document.getElementById('uploadOverlay').classList.remove('open'); }
+function closeUploadBg(e){ if(e.target===document.getElementById('uploadOverlay')) closeUpload(); }
 
-function closeUpload(){
-  document.getElementById('uploadOverlay').classList.remove('open');
-}
-
-function closeUploadBg(e){
-  if(e.target===document.getElementById('uploadOverlay')) closeUpload();
-}
-
-// Drag and drop
 const dz=document.getElementById('dropZone');
 dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag')});
 dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
-dz.addEventListener('drop',e=>{
-  e.preventDefault(); dz.classList.remove('drag');
-  const file=e.dataTransfer.files[0];
-  if(file) processTxtFile(file);
-});
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');const f=e.dataTransfer.files[0];if(f) processTxtFile(f);});
 
-function handleFile(e){
-  const file=e.target.files[0];
-  if(file) processTxtFile(file);
-}
+function handleFile(e){ const f=e.target.files[0]; if(f) processTxtFile(f); }
 
 function processTxtFile(file){
-  if(!file.name.endsWith('.txt')&&file.type!=='text/plain'){
-    showToast('⚠️ .txt 파일만 업로드 가능합니다'); return;
-  }
-  document.querySelector('.dz-title').textContent='📄 '+file.name;
-  document.querySelector('.dz-sub').textContent='파일 읽는 중...';
-  const reader=new FileReader();
-  reader.onload=e=>parseTxt(e.target.result);
-  reader.readAsText(file,'UTF-8');
+  document.getElementById('dzTitle').textContent='📄 '+file.name;
+  document.getElementById('dzSub').textContent='...';
+  const r=new FileReader();
+  r.onload=e=>parseTxt(e.target.result);
+  r.readAsText(file,'UTF-8');
 }
 
 function parseTxt(text){
-  const lines=text.split('\n');
-  const results=[]; const errors=[];
+  const lines=text.split('\n'); const results=[]; const errors=[];
   lines.forEach((line,i)=>{
     line=line.trim();
-    if(!line||line.startsWith('#')) return; // skip empty & comments
+    if(!line||line.startsWith('#')) return;
     const parts=line.split('|').map(s=>s.trim());
-    const viet=parts[0]||'';
-    const ko=parts[1]||'';
-    const tone=parts[2]||'';
-    const cat=parts[3]||'기타';
-    const example=parts[4]||'';
-    if(!viet||!ko){
-      errors.push({line:i+1,raw:line,reason:!viet?'베트남어 없음':'한국어 뜻 없음'});
-      return;
-    }
-    // Check duplicate
-    const isDup=userWords.some(w=>w.viet.toLowerCase()===viet.toLowerCase());
-    results.push({viet,ko,tone,cat,example,dup:isDup,lineNum:i+1});
+    const main=parts[0]||'', sub=parts[1]||'';
+    if(!main||!sub){ errors.push({lineNum:i+1,reason:!main?u.fl1:u.fl2}); return; }
+    const isDup=userWords.some(w=>getMain(w).toLowerCase()===main.toLowerCase());
+    const obj={};
+    obj[u.mainField]=main; obj[u.subField]=sub;
+    obj[u.toneField]=parts[2]||''; obj.cat=parts[3]||'기타/Khác'; obj.example=parts[4]||'';
+    if(!obj.viet) obj.viet=main; if(!obj.ko) obj.ko=sub;
+    results.push({...obj,dup:isDup,lineNum:i+1});
   });
-
   parsedWords=results;
-  renderPreview(results,errors);
-  document.querySelector('.dz-sub').textContent='파일 읽기 완료!';
-}
-
-function renderPreview(results,errors){
-  const pv=document.getElementById('previewBox');
-  const pl=document.getElementById('previewList');
+  const valid=results.filter(r=>!r.dup), dups=results.filter(r=>r.dup);
   const errBox=document.getElementById('errorSummary');
+  const msgs=[];
+  if(errors.length) msgs.push('❌ '+errors.length+(appMode==='viet'?'줄 오류':'lỗi'));
+  if(dups.length) msgs.push('⚠️ '+dups.length+(appMode==='viet'?'개 중복':'từ trùng'));
+  errBox.style.display=msgs.length?'block':'none';
+  errBox.innerHTML=msgs.join('<br>');
+  document.getElementById('previewBox').style.display='block';
+  document.getElementById('previewTitle').textContent=(appMode==='viet'?'미리보기 — ':'Xem trước — ')+valid.length+(appMode==='viet'?'개 추가됩니다':' từ sẽ được thêm');
+  document.getElementById('previewList').innerHTML=[...valid.slice(0,15),...(valid.length>15?[{_more:valid.length-15}]:[])].map(r=>{
+    if(r._more) return `<div style="text-align:center;color:var(--muted);font-size:13px;padding:8px">... +${r._more}</div>`;
+    return `<div class="preview-item"><div class="pv-main">${r[u.mainField]}</div><div style="color:var(--muted);margin-top:2px;font-size:13px">${r[u.subField]}</div></div>`;
+  }).join('');
   const confirmBtn=document.getElementById('uploadConfirmBtn');
-
-  const valid=results.filter(r=>!r.dup);
-  const dups=results.filter(r=>r.dup);
-
-  // Error summary
-  const errMsgs=[];
-  if(errors.length>0) errMsgs.push(`❌ ${errors.length}줄 형식 오류 (건너뜀)`);
-  if(dups.length>0) errMsgs.push(`⚠️ ${dups.length}개 중복 단어 (건너뜀)`);
-  if(errMsgs.length>0){
-    errBox.style.display='block';
-    errBox.innerHTML=errMsgs.join('<br>')+
-      (errors.length>0?'<div style="margin-top:8px;font-size:11px">오류 줄: '+errors.map(e=>e.lineNum+'번 줄 ('+e.reason+')').join(', ')+'</div>':'');
-  } else { errBox.style.display='none'; }
-
-  if(results.length===0&&errors.length===0){
-    pl.innerHTML='<div style="text-align:center;color:var(--muted);padding:20px">읽을 수 있는 단어가 없습니다.</div>';
-    pv.style.display='block'; confirmBtn.style.display='none'; return;
-  }
-
-  pv.style.display='block';
-  document.getElementById('previewTitle').textContent=
-    `미리보기 — 추가될 단어: ${valid.length}개`+(dups.length?` (중복 ${dups.length}개 제외)`:'');
-
-  pl.innerHTML=[...valid.slice(0,20),...(valid.length>20?[{_more:valid.length-20}]:[]),...dups.slice(0,3)]
-    .map(r=>{
-      if(r._more) return `<div style="text-align:center;color:var(--muted);font-size:13px;padding:8px">... 외 ${r._more}개 더</div>`;
-      if(r.dup) return `<div class="preview-item error"><div class="pv-viet">${r.viet}</div><div class="pv-ko">${r.ko}</div><div class="pv-err">⚠️ 이미 있는 단어 — 건너뜀</div></div>`;
-      return `<div class="preview-item"><div class="pv-viet">${r.viet}</div><div class="pv-ko">${r.ko}${r.tone?' <span style="color:var(--muted);font-size:11px">['+r.tone+']</span>':''}</div>${r.cat&&r.cat!=='기타'?`<div style="font-size:11px;color:var(--accent);margin-top:3px">${r.cat}</div>`:''}</div>`;
-    }).join('');
-
-  confirmBtn.style.display=valid.length>0?'block':'none';
-  if(valid.length>0) confirmBtn.textContent=`✅ ${valid.length}개 단어 추가하기`;
+  confirmBtn.style.display=valid.length?'block':'none';
+  confirmBtn.textContent='✅ '+valid.length+(appMode==='viet'?'개 단어 추가하기':' từ — Thêm vào');
+  document.getElementById('dzSub').textContent=appMode==='viet'?'파일 읽기 완료!':'Đọc file xong!';
 }
 
 function confirmUpload(){
   const valid=parsedWords.filter(r=>!r.dup);
-  if(valid.length===0){ showToast('추가할 단어가 없습니다'); return; }
-  valid.forEach(r=>{
-    maxId++;
-    userWords.push({id:maxId,viet:r.viet,ko:r.ko,tone:r.tone,cat:r.cat||'기타',example:r.example});
-  });
-  saveWords();
-  closeUpload();
-  renderWordList();
-  updateHome();
-  checkAchievements();
-  showToast(`🎉 ${valid.length}개 단어가 추가됐습니다!`);
+  valid.forEach(r=>{ maxId++; userWords.push({id:maxId,...r}); });
+  saveWords(); closeUpload(); renderWordList(); updateHome(); checkAchievements();
+  showToast('🎉 '+valid.length+(appMode==='viet'?'개 추가됐습니다!':' từ đã được thêm!'));
 }
 
-// ===== INIT =====
+// ============================================================
+// INIT
+// ============================================================
 window.addEventListener('load',()=>speechSynthesis.getVoices());
 speechSynthesis.onvoiceschanged=()=>{};
-checkStreak(); updateHome();
 </script>
 </body>
 </html>
